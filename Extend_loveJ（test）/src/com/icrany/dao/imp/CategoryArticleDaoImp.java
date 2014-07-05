@@ -4,13 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.directwebremoting.util.Logger;
 
 import com.icrany.dao.CategoryArticleDao;
 import com.icrany.pojo.CategoryArticle;
 import com.icrany.util.DbUtil;
-import com.mysql.jdbc.Statement;
 
 public class CategoryArticleDaoImp implements CategoryArticleDao {
 
@@ -42,7 +44,7 @@ public class CategoryArticleDaoImp implements CategoryArticleDao {
 			}
 			
 		} catch (SQLException e) {
-			logger.info("添加标签出错了");
+			logger.info("添加文章与对应分类信息出错了"+e.getStackTrace());
 			e.printStackTrace();
 		}finally{
 			DbUtil.close(rs);
@@ -51,6 +53,45 @@ public class CategoryArticleDaoImp implements CategoryArticleDao {
 		}
 		
 		return -1;
+	}
+	
+	/**
+	 * 根据文章的 id 来查询出该文章对应的分类信息出来
+	 * @param articleId
+	 * @return
+	 */
+	public List<Integer> queryByArticleId(int articleId){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Integer> categoryIdList = new ArrayList<Integer>();
+		String sql = "select categoryId from category_article where articleId = ?";
+		
+		conn = DbUtil.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,articleId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				int categoryId = rs.getInt("categoryId");
+				categoryIdList.add(categoryId);
+			}
+			
+			return categoryIdList;
+			
+		} catch (SQLException e) {
+			logger.info("查找文章对应的分类信息出错了" + e.getStackTrace());
+			e.printStackTrace(); 
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}
+		
+		return null;		
 	}
 
 }

@@ -3,13 +3,14 @@ package com.icrany.service.imp;
 import java.util.List;
 
 import com.icrany.dao.ArticleDao;
+import com.icrany.dao.CategoryArticleDao;
 import com.icrany.dao.CategoryDao;
 import com.icrany.dao.CommentDao;
 import com.icrany.dao.imp.ArticleDaoImp;
+import com.icrany.dao.imp.CategoryArticleDaoImp;
 import com.icrany.dao.imp.CategoryDaoImp;
 import com.icrany.dao.imp.CommentDaoImp;
 import com.icrany.pojo.Article;
-import com.icrany.pojo.Category;
 import com.icrany.pojo.Comment;
 import com.icrany.service.ArticleService;
 
@@ -20,6 +21,8 @@ public class ArticleServiceImp implements ArticleService{
 	private static CommentDao commentDao = new CommentDaoImp();
 	
 	private static CategoryDao categoryDao = new CategoryDaoImp();
+	
+	private static CategoryArticleDao categoryArticleDao = new CategoryArticleDaoImp();
 	
 	public int insert(Article entity){
 		return articleDao.insert(entity);
@@ -45,13 +48,12 @@ public class ArticleServiceImp implements ArticleService{
 		
 		//这里设置相应的文章中的附件信息，如评论数组，分类数组，标签数组，附件数组等
 		for(int i = 0 ; i < articleList.size() ; i++){
-			List<Comment> commentList = commentDao.findByArticleId(articleList.get(i).getId());//根据文章获取对应的评论
+			int articleId = articleList.get(i).getId();
+			List<Comment> commentList = commentDao.findByArticleId(articleId);//根据文章获取对应的评论
 			articleList.get(i).setCommentList(commentList);
 			articleList.get(i).setCommentCount(commentList.size());
-			
-//			List<Category> categoryList = CategoryDao.class;//TODO:处理一个多对多的查询，比较麻烦
+			List<Integer> categoryIdList = categoryArticleDao.queryByArticleId(articleId);//TODO:处理一个多对多的查询，比较麻烦
 		}
-		
 		return articleList;
 	}
 
