@@ -1,0 +1,22 @@
+body { margin:0; padding:0; width:100%; color:#959595; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
+html, .main { padding:0; margin:0; background-color:#fff;}
+.clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
+.logo { padding:0 0 0 40px; float:left; width:auto;}
+.logo img {border: none;float: left;}
+/* language */
+#language{float: left; padding-top: 37px; padding-left: 20px;}
+h1 { margin:0; padding:24px 0px; color:#49b6e9; font:normal 48px/1.2em Arial, Helvetica, sans-serif; letter-spacing:-1px;}
+h1 a, h1 a:hover { color:#49b6e9; text-decoration:none;}
+h1 small { display:block; padding:0 0 0 120px; font:normal 13px/1.2em Arial, Helvetica, sans-serif; color:#b7b7b7; letter-spacing:normal;}
+h2 { font:normal 24px Arial, Helvetica, sans-serif; padding:8px 0; margin:8px 0; color:#323a3f;}
+h2 a{text-decoration: none; color:#323a3f; }
+h2 a:hover{color:#49b6e9;text-decoration: none;}
+p { margin:8px 0; padding:0 0 8px 0; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
+p.spec { text-align:left;}
+a { color:#00b3ea; text-decoration:none;}
+a.rm, a.com { text-decoration:none;}
+
+.head
+{
+	bgcolor = "red";
+}
