@@ -1,5 +1,7 @@
 package com.icrany.service.imp;
 
+import java.util.List;
+
 import org.directwebremoting.util.Logger;
 
 import com.icrany.dao.CategoryArticleDao;
@@ -15,7 +17,6 @@ public class CategoryArticleServiceImp implements CategoryArticleService{
 	
 	@Override
 	public int insert(CategoryArticle entity) {
-		// TODO Auto-generated method stub
 		return categoryArticleDao.insert(entity);
 	}
 	
@@ -50,6 +51,16 @@ public class CategoryArticleServiceImp implements CategoryArticleService{
 			newArray[i] = Integer.parseInt(array[i]);
 		}
 		return insertArray(newArray,articleId);
+	}
+
+	@Override
+	public List<Integer> queryByCategoryId(int categoryId) {
+		return categoryArticleDao.queryByCategoryId(categoryId);
+	}
+
+	@Override
+	public List<Integer> queryByArticleId(int articleId) {
+		return categoryArticleDao.queryByArticleId(articleId);
 	}
 
 }

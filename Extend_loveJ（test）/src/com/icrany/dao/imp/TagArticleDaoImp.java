@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.directwebremoting.util.Logger;
 
-import com.icrany.dao.CategoryArticleDao;
 import com.icrany.dao.TagArticleDao;
-import com.icrany.pojo.CategoryArticle;
 import com.icrany.pojo.TagArticle;
 import com.icrany.util.DbUtil;
 import com.mysql.jdbc.Statement;
@@ -54,5 +54,83 @@ public class TagArticleDaoImp implements TagArticleDao {
 		
 		return -1;
 	}
+	
+	/**
+	 * 根据对应的文章 id 来获取相关的标签 id 
+	 * @param articleId
+	 * @return
+	 */
+	public List<Integer> queryByArticleId(int articleId){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Integer> tagIdList = new ArrayList<Integer>();
+		String sql = "select tagId from tag_article where articleId = ?";
+		
+		conn = DbUtil.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,articleId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				int tagId = rs.getInt("tagId");
+				tagIdList.add(tagId);
+			}
+			
+			return tagIdList;
+			
+		} catch (SQLException e) {
+			logger.info("查找文章对应的标签信息出错了" + e.getStackTrace());
+			e.printStackTrace(); 
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}
+		
+		return null;			
+	}
 
+	/**
+	 * 根据标签 id 来查找文章
+	 * @param articleId
+	 * @return
+	 */
+	public List<Integer> queryByTagId(int tagId){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Integer> articleIdList = new ArrayList<Integer>();
+		String sql = "select articleId from tag_article where tagId = ?";
+		
+		conn = DbUtil.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,tagId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				int articleId = rs.getInt("articleId");
+				articleIdList.add(articleId);
+			}
+			
+			return articleIdList;
+			
+		} catch (SQLException e) {
+			logger.info("根据标签 id 来查找文章 id 出错了" + e.getStackTrace());
+			e.printStackTrace(); 
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}
+		
+		return null;		
+	}		
 }

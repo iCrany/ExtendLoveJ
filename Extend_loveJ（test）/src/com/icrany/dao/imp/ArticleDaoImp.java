@@ -252,8 +252,44 @@ public class ArticleDaoImp implements ArticleDao{
 		return null;
 	}
 	
+	/**
+	 * TODO：这里根据关键字来进行搜索，目前暂时只支持单个关键字搜索，而且是只能根据文章的标题来进行正则表达式的匹配，需要改进
+	 * @param key
+	 * @return
+	 */
+	public List<Article> findByFuzzyName(String key){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from article where title LIKE ?";
+		List<Article> articleList = new ArrayList<Article>();
+		
+		conn = DbUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Article entity = new Article();
+				entity = fillArticle(entity,rs);
+				articleList.add(entity);
+			}
+			
+			return articleList;
+		} catch (SQLException e) {
+			logger.error("获取搜索关键字的文章出错 " + e.getStackTrace());
+			e.printStackTrace();
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}		
+		return null;		
+	}
 
-	
 	/**
 	 * 用来填充文章实例用的方法
 	 * @param entity

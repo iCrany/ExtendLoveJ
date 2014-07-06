@@ -93,5 +93,44 @@ public class CategoryArticleDaoImp implements CategoryArticleDao {
 		
 		return null;		
 	}
+	
+	/**
+	 * 根据文章的 id 来查询出该文章对应的分类信息出来
+	 * @param articleId
+	 * @return
+	 */
+	public List<Integer> queryByCategoryId(int categoryId){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Integer> articleIdList = new ArrayList<Integer>();
+		String sql = "select articleId from category_article where categoryId = ?";
+		
+		conn = DbUtil.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,categoryId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				int articleId = rs.getInt("articleId");
+				articleIdList.add(articleId);
+			}
+			
+			return articleIdList;
+			
+		} catch (SQLException e) {
+			logger.info("查找文章对应的分类信息出错了" + e.getStackTrace());
+			e.printStackTrace(); 
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}
+		
+		return null;		
+	}	
 
 }

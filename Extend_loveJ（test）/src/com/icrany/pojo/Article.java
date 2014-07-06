@@ -1,5 +1,7 @@
 package com.icrany.pojo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  * @author Administrator
  *
  */
-public class Article {
+public class Article implements Serializable{
 	public List<Comment> getCommentList() {
 		return commentList;
 	}
@@ -183,12 +185,12 @@ public class Article {
 
 	private int commentCount;//评论数
 	
-	private List<Comment> commentList ;//评论数组
+	private List<Comment> commentList = new ArrayList<Comment>();//评论数组
 	
-	private List<Attach> attachList;//附件数组
+	private List<Attach> attachList = new ArrayList<Attach>();//附件数组
 	
-	private List<Tag> tagList;//标签数组
+	private List<Tag> tagList = new ArrayList<Tag>();//标签数组
 	
-	private List<Category> categoryList;//分类数组
+	private List<Category> categoryList = new ArrayList<Category>();//分类数组
 
 }

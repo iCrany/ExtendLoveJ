@@ -11,4 +11,5 @@ public interface ArticleService{
 	public boolean update(Article entity);
 	public List<Article> getAllArticle();
 	public List<Article> findNewestArticle();
+	public List<Article> findByFuzzyName(String key);
 }

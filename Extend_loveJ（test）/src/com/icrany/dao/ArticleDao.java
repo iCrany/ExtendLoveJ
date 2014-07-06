@@ -12,4 +12,5 @@ public interface ArticleDao {
 	public Article findById(int id);
 	public List<Article> findAllArticle();
 	public List<Article> findNewestArticle();
+	public List<Article> findByFuzzyName(String key);
 }

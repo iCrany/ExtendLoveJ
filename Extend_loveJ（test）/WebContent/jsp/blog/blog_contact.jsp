@@ -38,9 +38,7 @@
 			</div>
 		</div>
 
-<!-- 		<div class="footer1"> -->
-			<%@ include file="common/blog_footer.jsp" %>
-<!-- 		</div> -->
+		<%@ include file="common/blog_footer.jsp" %>
 
 	</body>
 </html>

@@ -3,12 +3,12 @@
 <!--   	 搜索栏 -->
 	    <div class="widget-area" role="complementary">
 		    <h2 class="star">
-				<form action="" method="post" id="formID">
+				<form action="${pageContext.request.contextPath}/jsp/blog/blog_search" method="post" id="formID">
 					<div class="input-group">
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-search"></span>
 						</span>
-						<input type="text" name="searchinput" class="form-control" id="searchinput"/>
+						<input type="text" name="key" class="form-control" id="key"/>
 						<span class="input-group-btn">
 							<button type="submit" name="search" id="search" class="btn btn-default">搜索</button>
 						</span>
@@ -26,7 +26,7 @@
             	<div class="list-group">
 <!--             		这里进行循环的输出文章的标题 -->
 					<c:forEach items="${ newestArticle }" var="article" varStatus="itemStatus">
-						<a href="#" class="list-group-item"><c:out value="${ article.title }"/></a>
+						<a href="${pageContext.request.contextPath}/jsp/blog/blog_view?id=${ article.id }" class="list-group-item"><c:out value="${ article.title }"/></a>
 					</c:forEach>
             	</div>
             </div>
@@ -56,7 +56,7 @@
             	<div class="list-group">
 <!--             		这里进行循环的输出文章分类-->
 					<c:forEach items="${ categorys }" var="category" varStatus="itemStatus">
-						<a href="#" class="list-group-item"><c:out value="${ category.name }"/></a>
+						<a href="${pageContext.request.contextPath}/jsp/blog/blog_search?categoryId=${ category.id}" class="list-group-item"><c:out value="${ category.name }"/></a>
 					</c:forEach>
             	</div>
             </div>
@@ -70,7 +70,7 @@
 			<div class="tab-pane" id="friendlink">
             	<div class="list-group">
 					<c:forEach items="${ newestLink }" var="link" varStatus="itemStatus">
-						<a href="#" class="list-group-item"><c:out value="${ link.name }"/></a>
+						<a href="${ link.site }" class="list-group-item"><c:out value="${ link.name }"/></a>
 					</c:forEach>
             	</div>
             </div>
