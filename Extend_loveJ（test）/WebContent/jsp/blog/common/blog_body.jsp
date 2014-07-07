@@ -36,7 +36,7 @@
 			</div>
 			<div class="panel-body">
 				${ article.content }
-				<button type="button" class="btn btn-success pull-right"><span class="glyphicon glyphicon-chevron-down"></span>&ensp;阅读更多</button>
+				<button type="button" class="btn btn-success pull-right" name="readMore"><span class="glyphicon glyphicon-chevron-down"></span>&ensp;阅读更多</button>
 			</div>
 			
 			<div class="panel-footer">

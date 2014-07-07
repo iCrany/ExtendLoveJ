@@ -11,6 +11,10 @@
 		<!-- DC iMenu CSS -->
 		<link type="text/css" rel="stylesheet" href="../../styles/blog/menus/imenu/css/dc_imenu.css" />
 		
+		<script>
+			$('readMore')
+		</script>
+		
 		<title>iCrany</title>
 	</head>
 
