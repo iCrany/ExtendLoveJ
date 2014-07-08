@@ -14,9 +14,11 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.icrany.pojo.Article;
+import com.icrany.pojo.Pager;
 import com.icrany.pojo.User;
 import com.icrany.service.ArticleService;
 import com.icrany.service.CategoryArticleService;
@@ -43,7 +45,7 @@ public class SearchController {
 	
 	private static final Logger logger = Logger.getLogger(SearchController.class);
 	
-	private static final String SEARCH_BLOG = "blog_search";
+	private static final String SEARCH_BLOG = "/jsp/blog/blog_search";
 	
 	private static CategoryService categoryService = new CategoryServiceImp();
 
@@ -78,7 +80,7 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/blog_search")
-	public String serarch(Map<String,Object> map, HttpServletRequest request,HttpServletResponse response){
+	public String serarch(Map<String,Object> map, HttpServletRequest request,HttpServletResponse response,Integer currentPage){
 		//TODO:因为查找的话都应该是文章的一些内容，所以只要查找相应的文章即可,目前暂时只支持单个关键字的搜索，或者说是单个参数的搜索，以后改进
 		List<Article> articleList = null;
 		
@@ -105,8 +107,39 @@ public class SearchController {
 			articleList = searchByFuzzyName(key);
 		}
 		
-		map.put("articles", articleList);
+		//分页的处理
+		Pager pager = new Pager();
+		if(currentPage == null) currentPage = 1;
+		String url = "";
+		pager.setUrl(url);
+		pager.doWithArticles(articleList, currentPage, request);
+		map.put("articles",articleList);
+		map.put("pager",pager);
+		
 		createReferenceData(map);
+		
+		return SEARCH_BLOG;
+	}
+	
+	/**
+	 * 处理搜索页面的分页处理
+	 * @param map
+	 * @param request
+	 * @param response
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping(value="/blog_search/page/{currentPage}")
+	public String searchPaging(Map<String,Object> map, HttpServletRequest request,HttpServletResponse response,@PathVariable Integer currentPage){
+		
+//		//分页的处理
+//		Pager pager = new Pager();
+//		if(currentPage == null) currentPage = 1;
+//		pager.doWithArticles(articleList, currentPage, request);
+//		map.put("articles",articleList);
+//		map.put("pager",pager);
+		
+		createReferenceData(map);		
 		
 		return SEARCH_BLOG;
 	}
@@ -146,6 +179,11 @@ public class SearchController {
 		return articleList;
 	}
 	
+	/**
+	 * 根据关键字来查询相应的文章
+	 * @param key
+	 * @return
+	 */
 	public List<Article> searchByFuzzyName(String key){
 		List<Article> articleList = new ArrayList<Article>();
 		
@@ -166,6 +204,7 @@ public class SearchController {
 		map.put("tags", tagService.getAllTag());
 		map.put("categorys", categoryService.findAllCategory());
 		map.put("siteConfig", siteConfigService.findAllSiteConfig());//默认只有一个站点信息
+		
 		
 		//TODO:最新的五篇文章
 		map.put("newestArticle", articleService.findNewestArticle());

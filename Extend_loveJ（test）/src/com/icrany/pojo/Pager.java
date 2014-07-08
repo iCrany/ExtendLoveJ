@@ -31,6 +31,8 @@ public class Pager {
 	
 	private String html;//分页的html样式
 	
+	private String url ;//在填充分页的url用的，必须以 / 结尾，因为之后是一个数字用于查询第几页
+	
 	public Pager(){
 		this.pageSize = DEFAULT_PAGE_SIZE;
 		this.showPageSize = DEFAULT_SHOW_PAGE_SIZE;
@@ -106,7 +108,7 @@ public class Pager {
 		String contextPath = request.getContextPath();
 		System.out.println(" contextPath = " + contextPath);
 		StringBuilder htmlPaging = new StringBuilder("<li><a href='"
-						+ contextPath + "/jsp/blog/page/"
+						+ url
 						+ this.prePage + "'>&laquo;</a></li>");
 		
 		int begin = (this.pageIndex - 1)* this.pageSize;
@@ -116,7 +118,7 @@ public class Pager {
 		
 		for(int i = begin ,j = 0 ; i < end ;i++,j++){
 			htmlPaging.append("<li><a href='"
-					+  contextPath + "/jsp/blog/page/"
+					+  url
 					+ ( this.pageIndex + j)
 					+ "'>"
 					+ ( this.pageIndex + j) 
@@ -124,7 +126,7 @@ public class Pager {
 		}
 		
 		htmlPaging.append("<li><a href='"
-				+ contextPath + "/jsp/blog/page/"
+				+ url
 				+ this.nextPage + "'>&raquo;</a></li>");
 		
 		this.html = htmlPaging.toString();
@@ -144,6 +146,14 @@ public class Pager {
 
 	public void setHtml(String html) {
 		this.html = html;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 }

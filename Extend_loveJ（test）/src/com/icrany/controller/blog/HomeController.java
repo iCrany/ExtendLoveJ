@@ -108,6 +108,8 @@ public class HomeController {
 		//分页的处理
 		Pager pager = new Pager();
 		List<Article> articles = articleService.getAllArticle();
+		String url = request.getContextPath() + "/jsp/blog/page/";
+		pager.setUrl(url);
 		pager.doWithArticles(articles, currentPage, request);
 		map.put("articles",articles);
 		map.put("pager",pager);
