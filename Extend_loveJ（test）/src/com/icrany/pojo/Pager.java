@@ -76,8 +76,8 @@ public class Pager {
 	}
 
 	public void setPrePage(int prePage) {
-		if(prePage > this.prePage)
-			this.prePage = prePage;
+		if(prePage < 1) this.prePage = 1;
+		else this.prePage = prePage;
 	}
 
 	public int getNextPage() {
@@ -85,29 +85,28 @@ public class Pager {
 	}
 
 	public void setNextPage(int nextPage) {
-		this.nextPage = nextPage;
+		if(nextPage > this.pageTotal) this.nextPage = this.pageTotal;
+		else this.nextPage = nextPage;
+		
 	}
 
 	//分页类自行进行分析，只需把结果传这个类,这个类根据相应的逻辑输出这个分页的html
 	public void doWithArticles(List<Article> articles,int currentPage,HttpServletRequest request){
 		
-		System.out.println("==========doWithArticles=================");
-		System.out.println("currentPage = " + currentPage);
-		
 		this.itemTotal = articles.size();//设置查询的结果总数
-		this.pageIndex = currentPage;//设置当前页
-		this.prePage = this.pageIndex ;//设置前一页
-		this.pageTotal = (this.itemTotal + this.pageSize ) / this.pageSize;//设置一共有多少页
-				 
-		//设置下一页，首先判断是否有下一页
-		if(this.pageSize >= this.itemTotal) this.nextPage = this.pageIndex ;
-		else this.nextPage = this.pageIndex + 1;
+		
+		setPageIndex(currentPage);//设置当前页
+		setPrePage(currentPage-1);//设置前一页
+		setPageTotal((this.itemTotal + this.pageSize ) / this.pageSize);//设置一共有多少页
+		setNextPage(currentPage+1);	//设置下一页，首先判断是否有下一页
+	
+//		if(this.pageIndex >= this.itemTotal) this.nextPage = this.pageIndex ;
+//		else this.nextPage = this.pageIndex + 1;
 		
 		//这里自己进行逻辑处理，输出那个分页的 html 代码
+		StringBuilder htmlPaging  = new StringBuilder("");
 		
-		String contextPath = request.getContextPath();
-		System.out.println(" contextPath = " + contextPath);
-		StringBuilder htmlPaging = new StringBuilder("<li><a href='"
+		htmlPaging.append("<li><a href='"
 						+ url
 						+ this.prePage + "'>&laquo;</a></li>");
 		

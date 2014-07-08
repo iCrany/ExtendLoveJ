@@ -16,6 +16,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.icrany.pojo.Article;
 import com.icrany.pojo.Pager;
@@ -41,6 +42,7 @@ import com.icrany.service.imp.UserServiceImp;
 
 @Controller
 @RequestMapping(value="/jsp/blog")
+@SessionAttributes("articles")
 public class SearchController {
 	
 	private static final Logger logger = Logger.getLogger(SearchController.class);
@@ -97,7 +99,6 @@ public class SearchController {
 			System.out.println("========= 正在根据 tagId 来查找文章  =========");
 			//查找这个标签下的所有文章出来
 			int tagId = Integer.parseInt(request.getParameter("tagId"));
-			System.out.println("tagId = " + tagId);
 			articleList = searchByTagId(tagId);
 			
 		}else if(request.getParameter("key") != null){
@@ -110,7 +111,7 @@ public class SearchController {
 		//分页的处理
 		Pager pager = new Pager();
 		if(currentPage == null) currentPage = 1;
-		String url = "";
+		String url = request.getContextPath() + "/jsp/blog/blog_search/page/";
 		pager.setUrl(url);
 		pager.doWithArticles(articleList, currentPage, request);
 		map.put("articles",articleList);
@@ -132,13 +133,15 @@ public class SearchController {
 	@RequestMapping(value="/blog_search/page/{currentPage}")
 	public String searchPaging(Map<String,Object> map, HttpServletRequest request,HttpServletResponse response,@PathVariable Integer currentPage){
 		
-//		//分页的处理
-//		Pager pager = new Pager();
-//		if(currentPage == null) currentPage = 1;
-//		pager.doWithArticles(articleList, currentPage, request);
-//		map.put("articles",articleList);
-//		map.put("pager",pager);
-		
+		//分页的处理
+		Pager pager = new Pager();
+		if(currentPage == null) currentPage = 1;
+		String url = request.getContextPath() + "/jsp/blog/blog_search/page/";
+		pager.setUrl(url);		
+		//这个 articles 是从 session 中获取的，因为在该类中已经声明这个 articles 是 sessionAttribute ，SpringMVC 会自动存储在 session 中
+		pager.doWithArticles((List<Article>)request.getSession().getAttribute("articles"), currentPage, request);
+		map.put("pager",pager);
+		 
 		createReferenceData(map);		
 		
 		return SEARCH_BLOG;
