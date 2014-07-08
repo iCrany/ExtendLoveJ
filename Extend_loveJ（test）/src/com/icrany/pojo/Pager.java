@@ -99,9 +99,6 @@ public class Pager {
 		setPrePage(currentPage-1);//设置前一页
 		setPageTotal((this.itemTotal + this.pageSize ) / this.pageSize);//设置一共有多少页
 		setNextPage(currentPage+1);	//设置下一页，首先判断是否有下一页
-	
-//		if(this.pageIndex >= this.itemTotal) this.nextPage = this.pageIndex ;
-//		else this.nextPage = this.pageIndex + 1;
 		
 		//这里自己进行逻辑处理，输出那个分页的 html 代码
 		StringBuilder htmlPaging  = new StringBuilder("");
@@ -110,18 +107,38 @@ public class Pager {
 						+ url
 						+ this.prePage + "'>&laquo;</a></li>");
 		
-		int begin = (this.pageIndex - 1)* this.pageSize;
-		int end   = begin +  this.showPageSize;
+		int begin = getPageIndex();
+		int end = begin +  getShowPageSize() ;//左闭右开区间
 		
-		if(end > this.pageTotal) end = this.pageTotal;//若超过了原先计算的那个页的话，就设置为最后一页
+		if(getPageIndex() >= 5){
+			begin = getPageIndex() - 4;
+		}else{
+			begin = 1;
+		}
+		
+		end = begin + getShowPageSize();
+		if( end > getPageTotal()){
+			end = getPageTotal() + 1;
+		}
 		
 		for(int i = begin ,j = 0 ; i < end ;i++,j++){
-			htmlPaging.append("<li><a href='"
-					+  url
-					+ ( this.pageIndex + j)
-					+ "'>"
-					+ ( this.pageIndex + j) 
-					+ "</a></li>");
+			
+			if(i == getPageIndex() ){
+				htmlPaging.append("<li class='active'><a href='"
+						+  url
+						+ ( i )//this.pageIndex + j
+						+ "'>"
+						+ ( i ) 
+						+ "</a></li>");				
+			}else{
+			
+				htmlPaging.append("<li><a href='"
+						+  url
+						+ ( i )
+						+ "'>"
+						+ ( i ) 
+						+ "</a></li>");
+			}
 		}
 		
 		htmlPaging.append("<li><a href='"
