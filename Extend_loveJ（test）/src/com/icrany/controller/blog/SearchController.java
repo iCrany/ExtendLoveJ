@@ -93,7 +93,6 @@ public class SearchController {
 			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 			articleList = searchByCategoryId(categoryId);
 			
-			
 		}else if(request.getParameter("tagId") != null){
 			System.out.println("========= 正在根据 tagId 来查找文章  =========");
 			//查找这个标签下的所有文章出来
@@ -107,6 +106,7 @@ public class SearchController {
 			articleList = searchByFuzzyName(key);
 		}
 		
+		System.out.println("==================serarch=====================");
 		//分页的处理
 		Pager pager = new Pager();
 		if(currentPage == null) currentPage = 1;
@@ -204,7 +204,6 @@ public class SearchController {
 		map.put("tags", tagService.getAllTag());
 		map.put("categorys", categoryService.findAllCategory());
 		map.put("siteConfig", siteConfigService.findAllSiteConfig());//默认只有一个站点信息
-		
 		
 		//TODO:最新的五篇文章
 		map.put("newestArticle", articleService.findNewestArticle());

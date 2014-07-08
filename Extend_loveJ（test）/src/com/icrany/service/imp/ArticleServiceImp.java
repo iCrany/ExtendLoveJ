@@ -90,6 +90,27 @@ public class ArticleServiceImp implements ArticleService{
 		
 		List<Article> articleList = articleDao.findAllArticle();
 		
+		return getReferenceData2Article(articleList);
+	}
+
+	@Override
+	public List<Article> findNewestArticle() {
+		return articleDao.findNewestArticle();
+	}
+
+	@Override
+	public List<Article> findByFuzzyName(String key) {
+		List<Article> articleList = articleDao.findByFuzzyName(key);
+		return getReferenceData2Article(articleList);
+	} 
+	
+	/**
+	 * 把文章中相关的 全部信息拿出来
+	 * @param articleList
+	 * @return
+	 */
+	public List<Article> getReferenceData2Article(List<Article> articleList){
+		
 		//这里设置相应的文章中的附件信息，如评论数组，分类数组，标签数组，附件数组等
 		for(int i = 0 ; i < articleList.size() ; i++){
 			
@@ -121,16 +142,7 @@ public class ArticleServiceImp implements ArticleService{
 				articleList.get(i).getTagList().add(tag);
 			}
 		}
+		
 		return articleList;
 	}
-
-	@Override
-	public List<Article> findNewestArticle() {
-		return articleDao.findNewestArticle();
-	}
-
-	@Override
-	public List<Article> findByFuzzyName(String key) {
-		return articleDao.findByFuzzyName(key);
-	} 
 }
