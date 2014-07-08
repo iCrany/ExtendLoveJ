@@ -12,7 +12,7 @@
 		<link type="text/css" rel="stylesheet" href="../../styles/blog/menus/imenu/css/dc_imenu.css" />
 		
 		<script>
-			$('readMore')
+// 			$('readMore')
 		</script>
 		
 		<title>iCrany</title>

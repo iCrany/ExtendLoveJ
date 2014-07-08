@@ -30,7 +30,6 @@ public class DbUtil {
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.error("数据库加载出错");
 		}
@@ -41,7 +40,6 @@ public class DbUtil {
 			conn = DriverManager.getConnection(url);
 			return conn;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.error("连接数据库出错");
 		}
@@ -58,12 +56,10 @@ public class DbUtil {
 				try {
 					conn.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -79,7 +75,6 @@ public class DbUtil {
 					result.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -96,7 +91,6 @@ public class DbUtil {
 					stmt.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -113,7 +107,6 @@ public class DbUtil {
 					pstmt.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

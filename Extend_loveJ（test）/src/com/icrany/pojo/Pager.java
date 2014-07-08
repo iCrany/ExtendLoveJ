@@ -1,5 +1,9 @@
 package com.icrany.pojo;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 一个分页类
  * @author Administrator
@@ -25,8 +29,11 @@ public class Pager {
 	
 	private int nextPage;//下一页
 	
+	private String html;//分页的html样式
+	
 	public Pager(){
 		this.pageSize = DEFAULT_PAGE_SIZE;
+		this.showPageSize = DEFAULT_SHOW_PAGE_SIZE;
 	}
 	
 	public int getPageSize() {
@@ -77,6 +84,66 @@ public class Pager {
 
 	public void setNextPage(int nextPage) {
 		this.nextPage = nextPage;
+	}
+
+	//分页类自行进行分析，只需把结果传这个类,这个类根据相应的逻辑输出这个分页的html
+	public void doWithArticles(List<Article> articles,int currentPage,HttpServletRequest request){
+		
+		System.out.println("==========doWithArticles=================");
+		System.out.println("currentPage = " + currentPage);
+		
+		this.itemTotal = articles.size();//设置查询的结果总数
+		this.pageIndex = currentPage;//设置当前页
+		this.prePage = this.pageIndex ;//设置前一页
+		this.pageTotal = (this.itemTotal + this.pageSize ) / this.pageSize;//设置一共有多少页
+				 
+		//设置下一页，首先判断是否有下一页
+		if(this.pageSize >= this.itemTotal) this.nextPage = this.pageIndex ;
+		else this.nextPage = this.pageIndex + 1;
+		
+		//这里自己进行逻辑处理，输出那个分页的 html 代码
+		
+		String contextPath = request.getContextPath();
+		System.out.println(" contextPath = " + contextPath);
+		StringBuilder htmlPaging = new StringBuilder("<li><a href='"
+						+ contextPath + "/jsp/blog/page/"
+						+ this.prePage + "'>&laquo;</a></li>");
+		
+		int begin = (this.pageIndex - 1)* this.pageSize;
+		int end   = begin +  this.showPageSize;
+		
+		if(end > this.pageTotal) end = this.pageTotal;//若超过了原先计算的那个页的话，就设置为最后一页
+		
+		for(int i = begin ,j = 0 ; i < end ;i++,j++){
+			htmlPaging.append("<li><a href='"
+					+  contextPath + "/jsp/blog/page/"
+					+ ( this.pageIndex + j)
+					+ "'>"
+					+ ( this.pageIndex + j) 
+					+ "</a></li>");
+		}
+		
+		htmlPaging.append("<li><a href='"
+				+ contextPath + "/jsp/blog/page/"
+				+ this.nextPage + "'>&raquo;</a></li>");
+		
+		this.html = htmlPaging.toString();
+	}
+
+	public int getShowPageSize() {
+		return showPageSize;
+	}
+
+	public void setShowPageSize(int showPageSize) {
+		this.showPageSize = showPageSize;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+
+	public void setHtml(String html) {
+		this.html = html;
 	}
 	
 }

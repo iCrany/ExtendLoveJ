@@ -16,7 +16,7 @@
 				</form>
 			</h2>
 	    </div>  
-	    <hr>
+	    <br>
 <!-- 	   最新文章 -->
 		<aside class="panel panel-primary">
 			<div class="panel-heading">

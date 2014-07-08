@@ -2,15 +2,22 @@ package com.icrany.controller.blog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.icrany.pojo.Article;
+import com.icrany.pojo.Pager;
 import com.icrany.pojo.User;
 import com.icrany.service.ArticleService;
 import com.icrany.service.CategoryService;
@@ -33,7 +40,7 @@ public class HomeController {
 	
 	private static Logger logger = Logger.getLogger(HomeController.class);
 	
-	private static final String HOME = "home";
+	private static final String HOME = "/jsp/blog/home";
 	
 	private static CategoryService categoryService = new CategoryServiceImp();
 
@@ -64,8 +71,25 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/home")
-	public String home(Map<String,Object> map,User user){
-		createReferenceData(map,user);
+	public String home(Map<String,Object> map, HttpServletRequest request,Integer currentPage){
+		if(currentPage == null) currentPage = 1;
+		
+		createReferenceData(map,currentPage,request);
+		return HOME;
+	}
+	
+	/**
+	 * 这里处理主页的分页类的处理,注意这里的  url 是自己设定的，模仿 WordPress
+	 * @param map
+	 * @param request
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping(value="/page/{currentPage}")
+	public String homePaging(Map<String,Object> map, HttpServletRequest request, @PathVariable Integer currentPage){
+		createReferenceData(map,currentPage,request);
+		
+		//不进行重定向的话，那就不会触发那个对应某个 url 的控制器中的方法了
 		return HOME;
 	}
 	
@@ -74,13 +98,19 @@ public class HomeController {
 	 * @param map
 	 * @param user
 	 */
-	private void createReferenceData(Map<String,Object> map,User user){
-		
+	private void createReferenceData(Map<String,Object> map,Integer currentPage,HttpServletRequest request){
+		User user = new User();
 		map.put("user", userService.find(user));//默认是只有一个用户的，这个参数是没有起作用的
 		map.put("tags", tagService.getAllTag());
 		map.put("categorys", categoryService.findAllCategory());
 		map.put("siteConfig", siteConfigService.findAllSiteConfig());//默认只有一个站点信息
-		map.put("articles",articleService.getAllArticle());
+		
+		//分页的处理
+		Pager pager = new Pager();
+		List<Article> articles = articleService.getAllArticle();
+		pager.doWithArticles(articles, currentPage, request);
+		map.put("articles",articles);
+		map.put("pager",pager);
 		
 		//TODO:最新的五篇文章
 		map.put("newestArticle", articleService.findNewestArticle());

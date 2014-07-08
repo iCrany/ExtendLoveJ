@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <div class="content">
- 	<c:forEach items="${ articles }" var="article" varStatus="itemStatus">
+ 	<c:forEach items="${ articles }" var="article" begin="${ (pager.pageIndex-1) * pager.pageSize }" end="${ (pager.pageIndex-1) * pager.pageSize + pager.pageSize -1 }" varStatus="itemStatus">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="row">
@@ -47,4 +47,8 @@
 			</div>
 		</div>
 	</c:forEach>
+	<ul class='pagination'>
+<!-- 		这里由pager类来生成 -->
+		${ pager.html }
+	</ul>
 </div>
