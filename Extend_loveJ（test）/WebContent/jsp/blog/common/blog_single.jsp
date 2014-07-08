@@ -42,13 +42,13 @@
 			<c:if test="${ user != null }">
 					<button type="button" class="btn btn-info pull-right"><span class="glyphicon glyphicon-edit"></span>&ensp;修改</button>
 			</c:if>
-			<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-comment"></span>&ensp;
+			<button type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/jsp/blog/blog_view?id=${article.id}#comments'"><span class="glyphicon glyphicon-comment" ></span>&ensp;
 				<c:choose>
 					<c:when test="${ article.commentCount == 0}">
-						<a href="#comments">抢沙发</a>
+						抢沙发
 					</c:when>
 					<c:otherwise>
-						<a href="#comments">${ article.commentCount }个评论</a>
+						${ article.commentCount }个评论
 					</c:otherwise>
 				</c:choose>
 			</button>

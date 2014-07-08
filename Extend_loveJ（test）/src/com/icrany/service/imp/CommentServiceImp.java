@@ -50,4 +50,9 @@ public class CommentServiceImp implements CommentService {
 		return commentDao.findNewestComment();
 	}
 
+	@Override
+	public List<Comment> findByArticleId(int articleId) {
+		return commentDao.findByArticleId(articleId);
+	}
+
 }

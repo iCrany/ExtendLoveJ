@@ -1,5 +1,6 @@
 package com.icrany.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Administrator
  *
  */
-public class Pager {
+public class Pager implements Serializable{
 
 	private static final int DEFAULT_PAGE_SIZE = 10;
 	

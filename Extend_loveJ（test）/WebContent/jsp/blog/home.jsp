@@ -27,6 +27,12 @@
 			<%@ include file="common/blog_nav.jsp"%>
 		</div>
 		
+<!-- 		<div class="btn-group-vertical pull-right" id="scrollGroup"> -->
+<!-- 			<button type="button" class="btn btn-default scrollToTop"><span class="glyphicon glyphicon-circle-arrow-up"></span></button> -->
+<!-- 			<button type="button" class="btn btn-default Refresh"><span class="glyphicon glyphicon-refresh"></span></button> -->
+<!-- 			<button type="button" class="btn btn-default scrollToBottom"><span class="glyphicon glyphicon-circle-arrow-down"></span></button> -->
+<!-- 		</div>			 -->
+		
 		<div class="row">
 			<div class="col-sm-8 blog-main"> <!--  col-md-6 -->
 <!-- 				面包屑功能的开发 -->
@@ -41,6 +47,7 @@
 			<div class="sidebar-offcanvas col-xs-6 col-xs-4" id="sidebar"> <!-- sidebar-offcanvas -->
 				<%@ include file="common/blog_sider.jsp"%>
 			</div>
+		
 		</div>
 
 		<%@ include file="common/blog_footer.jsp" %>

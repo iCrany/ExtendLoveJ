@@ -174,6 +174,7 @@ public class CommentDaoImp implements CommentDao {
 		return null;
 	}
 	
+	
 	/**
 	 * 根据文章的id 来查询对应文章的评论数组
 	 * @param articleId
@@ -419,6 +420,7 @@ public class CommentDaoImp implements CommentDao {
 			entity.setSite(rs.getString("site"));
 			entity.setStatus(rs.getBoolean("status"));
 			entity.setTrash(rs.getBoolean("trash"));
+			entity.setPostTime(rs.getTimestamp("postTime"));
 			
 			return entity;
 		} catch (SQLException e) {

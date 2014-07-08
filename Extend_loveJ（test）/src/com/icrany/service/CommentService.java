@@ -11,6 +11,7 @@ public interface CommentService {
 	public Comment findById(int id);
 	public List<Comment> findAllComment();
 	public List<Comment> findNewestComment();
+	public List<Comment> findByArticleId(int articleId);
 	public boolean update(Comment entity);
 	public boolean updateAttribute(String name,Comment entity);
 }

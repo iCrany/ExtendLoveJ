@@ -11,7 +11,8 @@
     			</c:choose>
     			
     			</span></small></h3>
-    		<form action="" id="commentForm" name="commentForm"  role="form">
+    		<form action="${pageContext.request.contextPath}/jsp/blog/addComment?articleId=${ article.id }" id="commentForm" name="commentForm"  role="form">
+    			<input type="hidden" name="articleId" value="${ article.id }">
     			<div class="input-group">
     				<span class="input-group-addon">
     					<span class="glyphicon glyphicon-user">
@@ -41,7 +42,7 @@
     					<span class="glyphicon glyphicon-comment">
     					</span>
     				</span>
-    				<textarea name="comment" id="comment" rows="8" cols="" class="form-control"></textarea>
+    				<textarea name="content" id="content" rows="8" cols="" class="form-control"></textarea>
     			</div>
     			<hr>
     			<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">
@@ -49,25 +50,33 @@
     			</button>			
     		</form>
     	</div>
-    	
-    	<!--     		这里就循环的输出该页面下所有的评论即可 -->
+    	<br>
+    	<!--     		这里就循环的输出该页面下所有的评论即可 暂时不做分页处理-->
     	<c:forEach items="${ comments }" var="comment" varStatus="itemStatus">
+    		<c:if test="${ comment.status == true}">
 	    	<div name="comment-12" id="comment-12" class="">
 	    		<div class="media">
+<!-- 	    			暂时这个 graver头像不开发 -->
 		    		<a href="#" class="pull-left" rel="nofollow">
 		    			<img id="" class="img-thumbnail avatar-64 photo grav-hashed grav-hijack" height="64" width="64">
 		    		</a>
 		    		<div class="mediabody">
 			    			<h5 class="mediaheadding">
 			    				<a href="${ comment.site }"><c:out value="${ comment.name }"/></a>
-			    				<small><c:out value="${ comment.postTime }"/></small>
+			    				<small> 发表于：<c:out value="${ comment.postTime }"/></small>
 			    			</h5>
 			    			<div class="well well-sm">
 			    				<p><c:out value="${ comment.content }"/></p>
 			    			</div>	    			
-		    			
 		    		</div>
+					<div class="btn-group pull-right">
+						<a class="comment-reply-link" href="#comments" onclick="">
+							<button type="button" class="btn btn-info btn-sm">回复&ensp;<span class="glyphicon glyphicon-share-alt"></span>
+							</button>
+						</a>
+					</div>		    		
 		    	</div>
 	    	</div>
+	    	</c:if>
     	</c:forEach>
     </div>

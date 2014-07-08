@@ -73,7 +73,7 @@ public class ArticleViewController {
 		article = articleService.queryById(article.getId());
 		map.put("article", article);
 		
-		createReferenceData(map);
+		createReferenceData(map,article.getId());
 		return VIEW_BLOG;
 	}
 	
@@ -82,12 +82,15 @@ public class ArticleViewController {
 	 * @param map
 	 * @param user
 	 */
-	private void createReferenceData(Map<String,Object> map){
+	private void createReferenceData(Map<String,Object> map , int articleId){
 		User user = new User();//虚设的一个实例，没有任何的用处
 		map.put("user", userService.find(user));//默认是只有一个用户的，这个参数是没有起作用的
 		map.put("tags", tagService.getAllTag());
 		map.put("categorys", categoryService.findAllCategory());
 		map.put("siteConfig", siteConfigService.findAllSiteConfig());//默认只有一个站点信息
+		
+		//TODO:还要存放这篇文章下的所有评论
+		map.put("comments", commentService.findByArticleId(articleId));
 		
 		//TODO:最新的五篇文章
 		map.put("newestArticle", articleService.findNewestArticle());
