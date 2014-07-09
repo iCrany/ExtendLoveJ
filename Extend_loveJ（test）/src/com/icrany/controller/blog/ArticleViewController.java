@@ -67,10 +67,12 @@ public class ArticleViewController {
 	
 	@RequestMapping(value="/blog_view")
 	public String blogView(Map<String,Object> map, Article article){
-		logger.info("==============blogView==============");
-		System.out.println(" articleId = " + article.getId());
 		
 		article = articleService.queryById(article.getId());
+		//点击一次就自增一个文章的浏览数
+		article.setView(article.getView()+1);
+		articleService.update(article);
+		
 		map.put("article", article);
 		
 		createReferenceData(map,article.getId());

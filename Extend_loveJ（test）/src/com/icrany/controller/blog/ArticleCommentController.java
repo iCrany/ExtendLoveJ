@@ -2,7 +2,6 @@ package com.icrany.controller.blog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.icrany.pojo.Article;
 import com.icrany.pojo.Comment;
-import com.icrany.pojo.Pager;
 import com.icrany.pojo.User;
 import com.icrany.service.ArticleService;
 import com.icrany.service.CategoryService;
@@ -80,11 +77,10 @@ public class ArticleCommentController {
 		String postIP = null;//TODO:发表的 ip 地址
 		comment.setPostIP(postIP);
 		comment.setPostTime(postTime);
-		
 		commentService.insert(comment);
 		createReferenceData(map,comment.getArticleId());
 		
-		return  "redirect:" + VIEW_BLOG;//重定向，防止刷新的时候评论重复提交的问题
+		return  "redirect:" + VIEW_BLOG + "?id=" + comment.getArticleId();//重定向，防止刷新的时候评论重复提交的问题
 	}
 	
 	//准备视图相关的一些数据

@@ -2,6 +2,8 @@ package com.icrany.service.imp;
 
 import java.util.List;
 
+import org.directwebremoting.util.Logger;
+
 import com.icrany.dao.ArticleDao;
 import com.icrany.dao.CategoryArticleDao;
 import com.icrany.dao.CategoryDao;
@@ -21,6 +23,8 @@ import com.icrany.pojo.Tag;
 import com.icrany.service.ArticleService;
 
 public class ArticleServiceImp implements ArticleService{
+	
+	private static final Logger logger = Logger.getLogger(ArticleServiceImp.class);
 	
 	private static ArticleDao articleDao = new ArticleDaoImp();
 	
@@ -49,9 +53,6 @@ public class ArticleServiceImp implements ArticleService{
 		
 		int articleId = id;
 		Article article = articleDao.findById(id);
-		
-		System.out.println("===========ArticleServiceImp.queryById()========");
-		System.out.println("articleId = " + articleId);
 		//1:设置相应的评论
 		List<Comment> commentList = commentDao.findByArticleId(articleId);//根据文章获取对应的评论
 		article.setCommentList(commentList);

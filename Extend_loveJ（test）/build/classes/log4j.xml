@@ -115,7 +115,7 @@
 	-->
 	
 	<root>
-		<priority value="INFO" />
+		<priority value="DEBUG" />
 		<appender-ref ref="LOG.Console" />
 		<appender-ref ref="LOG.DEBUG" />
 		<appender-ref ref="LOG.INFO" />

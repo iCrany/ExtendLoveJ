@@ -13,6 +13,7 @@
     			</span></small></h3>
     		<form action="${pageContext.request.contextPath}/jsp/blog/addComment?articleId=${ article.id }" id="commentForm" name="commentForm"  role="form">
     			<input type="hidden" name="articleId" value="${ article.id }">
+    			<input type="hidden" name="id" value="${ article.id }">
     			<div class="input-group">
     				<span class="input-group-addon">
     					<span class="glyphicon glyphicon-user">
@@ -54,7 +55,8 @@
     	<!--     		这里就循环的输出该页面下所有的评论即可 暂时不做分页处理-->
     	<c:forEach items="${ comments }" var="comment" varStatus="itemStatus">
     		<c:if test="${ comment.status == true}">
-	    	<div name="comment-12" id="comment-12" class="">
+	    	<div id="comment + ${ comment.id }">
+	    		<p></p>
 	    		<div class="media">
 <!-- 	    			暂时这个 graver头像不开发 -->
 		    		<a href="#" class="pull-left" rel="nofollow">
