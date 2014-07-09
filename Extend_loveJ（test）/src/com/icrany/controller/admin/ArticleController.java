@@ -107,22 +107,9 @@ public class ArticleController {
 		//获取 Category 和 tag 的选择结果
 		String[] categorys = request.getParameterValues("categorys");
 		String[] tags = request.getParameterValues("tags");
-		
-		System.out.println("================================begin======================================");
-		for(int i=0;i<categorys.length;i++){
-			System.out.println(i + " category " + categorys[i]);
-		}
-		
-		for(int i=0;i<tags.length;i++){
-			System.out.println(i + " tag " + tags[i]);
-		}
-		
-		System.out.println("=================================end=====================================");
-		
 		createDataPrepare(article,map);
 		int articleId = articleService.insert(article);
 		
-		System.out.println("articleId = " + articleId);
 		categoryArticleService.insertArray(categorys, articleId);
 		tagArticleService.insertArray(tags, articleId);
 		

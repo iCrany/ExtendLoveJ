@@ -61,11 +61,8 @@ public class ArticleCommentController {
 	 */
 	@InitBinder
 	private void dateBinder(WebDataBinder binder) {
-	            //The date format to parse or output your dates
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	            //Create a new CustomDateEditor
 	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	            //Register it as custom editor for the Date type
 	    binder.registerCustomEditor(Date.class, editor);
 	}
 	
@@ -78,23 +75,16 @@ public class ArticleCommentController {
 	 */
 	@RequestMapping(value="/addComment")
 	public String addComment(Map<String,Object> map,HttpServletRequest request,Comment comment){
-		
-		System.out.println("name = " + comment.getName());
-		System.out.println("email = " + comment.getEmail());
-		System.out.println("site = " + comment.getSite());
-		System.out.println("content = " + comment.getContent());
-		System.out.println("articleId = " + comment.getArticleId());
 
 		Date postTime = new Date();//发表的时间
 		String postIP = null;//TODO:发表的 ip 地址
 		comment.setPostIP(postIP);
 		comment.setPostTime(postTime);
-		System.out.println("postTime = " + comment.getPostTime());
 		
 		commentService.insert(comment);
 		createReferenceData(map,comment.getArticleId());
 		
-		return  "redirect:" + VIEW_BLOG;
+		return  "redirect:" + VIEW_BLOG;//重定向，防止刷新的时候评论重复提交的问题
 	}
 	
 	//准备视图相关的一些数据

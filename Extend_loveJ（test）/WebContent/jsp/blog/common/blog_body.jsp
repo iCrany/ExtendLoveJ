@@ -37,13 +37,13 @@
 			
 			<div class="panel-body">
 				${ article.content }
-				<button type="button" class="btn btn-success pull-right" name="readMore" onclick="location.href='${pageContext.request.contextPath}/jsp/blog/blog_view?id=${article.id}'">
+				<button type="button" class="btn btn-success pull-right" name="readMore" onclick="location.href='${pageContext.request.contextPath}/jsp/blog/blog_view?id=${article.id}#title'">
 				<span class="glyphicon glyphicon-chevron-down"></span>&ensp;阅读更多</button>
 			</div>
 			
 			<div class="panel-footer">
 				<c:if test="${ user != null }">
-					<button type="button" class="btn btn-info pull-right"><span class="glyphicon glyphicon-edit"></span>&ensp;修改</button>
+					<button type="button" class="btn btn-info pull-right" onclick="location.href='${pageContext.request.contextPath}/jsp/admin/content/article_update?id=${article.id}#title'"><span class="glyphicon glyphicon-edit"></span>&ensp;修改</button>
 				</c:if>
 				<button type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/jsp/blog/blog_view?id=${article.id}#comments'"><span class="glyphicon glyphicon-comment"></span>&ensp;${ article.commentCount }个评论</button>
 			</div>
