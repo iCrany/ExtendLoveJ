@@ -26,7 +26,7 @@
 			<!-- 隔壁的一些框框 侧边栏 -->
 			<div class="sidebar-offcanvas col-xs-2" id="sidebar"> <!-- sidebar-offcanvas -->
 				<ul class="nav nav-pills">
-				  <li class="active"><a href="#">首页</a></li>
+				  <li class="active"><a href="${pageContext.request.contextPath}">首页</a></li>
 				</ul>
 			</div>
 			
@@ -34,7 +34,9 @@
 <!-- 				面包屑功能的开发 -->
 				<br>
 				<ol class="breadcrumb">
-					<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+					<li class="active">
+						<a href="#"><span class="glyphicon glyphicon-home"></span></a>
+					</li>
 				</ol>
 				<div class="content">
 					<div class="panel panel-default">

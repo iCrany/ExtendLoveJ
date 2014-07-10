@@ -11,6 +11,7 @@ public interface ArticleDao {
 	public boolean delete(Article entity);
 	public Article findById(int id);
 	public List<Article> findAllArticle();
+	public List<Integer> findAllArticleId();
 	public List<Article> findNewestArticle();
 	public List<Article> findByFuzzyName(String key);
 }

@@ -188,10 +188,11 @@ public class ArticleDaoImp implements ArticleDao{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from article";
+		String sql = "select * from article order by postTime desc";//根据发表的日期来排序显示
 		List<Article> articleList = new ArrayList<Article>();
 		
 		conn = DbUtil.getConnection();
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -212,6 +213,43 @@ public class ArticleDaoImp implements ArticleDao{
 		}		
 
 		return null;
+	}
+	
+	/**
+	 * 查找所有文章的 id 列表
+	 * @return
+	 */
+	public List<Integer> findAllArticleId(){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select id from article order by postTime desc";//根据发表的日期来排序显示
+		List<Integer> articleIdList = new ArrayList<Integer>();
+		
+		conn = DbUtil.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				int id = rs.getInt("id");
+				articleIdList.add(id);
+			}
+			
+			return articleIdList;
+			
+		} catch (SQLException e) {
+			logger.error("查找所有文章的 id 列表出错 "+e.getStackTrace());
+			e.printStackTrace();
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}		
+
+		return null;		
 	}
 	
 	/**

@@ -76,7 +76,22 @@ public class ArticleServiceImp implements ArticleService{
 			
 			Tag tag = tagDao.findById(tagId);
 			article.getTagList().add(tag);
-		}		
+		}
+		
+		//4:获取该文章的上一篇和下一篇的文章id，顺序是按发表时间的先后顺序来进行排序
+		List<Integer> articleIdList = articleDao.findAllArticleId();
+		//预处理的将每一篇文章之间的 id 号都关联起来，方便后面实现上一篇和下一篇的功能
+		for(int i = 0 ;i < articleIdList.size() ;i++) {
+			if( articleIdList.get(i) == article.getId() && i - 1  >= 0 ) {
+				int preArticleId = articleIdList.get(i-1);
+				article.setPreArticleId(preArticleId);
+			}
+			if( articleIdList.get(i) == article.getId() &&  i + 1 < articleIdList.size() ){
+				int nextArticleId = articleIdList.get(i + 1);
+				article.setNextArticleId(nextArticleId);
+			}
+		}
+		
 		return article;
 	}
 	

@@ -11,6 +11,7 @@ import java.util.List;
  *
  */
 public class Article implements Serializable{
+
 	public List<Comment> getCommentList() {
 		return commentList;
 	}
@@ -183,6 +184,8 @@ public class Article implements Serializable{
 	
 	//======================================以下属性在 article 表中都不存在 =============================================
 
+	private static final long serialVersionUID = 1L;
+	
 	private int commentCount;//评论数
 	
 	private List<Comment> commentList = new ArrayList<Comment>();//评论数组
@@ -192,5 +195,25 @@ public class Article implements Serializable{
 	private List<Tag> tagList = new ArrayList<Tag>();//标签数组
 	
 	private List<Category> categoryList = new ArrayList<Category>();//分类数组
+	
+	private int preArticleId = -1;//上一篇文章的 id
+	
+	private int nextArticleId = -1;//下一篇文章的 id
+
+	public int getPreArticleId() {
+		return preArticleId;
+	}
+
+	public void setPreArticleId(int preArticleId) {
+		this.preArticleId = preArticleId;
+	}
+
+	public int getNextArticleId() {
+		return nextArticleId;
+	}
+
+	public void setNextArticleId(int nextArticleId) {
+		this.nextArticleId = nextArticleId;
+	}
 
 }

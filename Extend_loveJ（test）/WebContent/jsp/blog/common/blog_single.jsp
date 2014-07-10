@@ -55,6 +55,24 @@
 			</button>
 		</div>
 	</div>
+		
+	<ul class="pager">
+		<c:if test="${ article.preArticleId != -1 }">
+			<li class="previous">
+				<a href="${pageContext.request.contextPath}/jsp/blog/blog_view?id=${ article.preArticleId }#title" rel="prev">
+					上一篇
+				</a>
+			</li>
+		</c:if>
+		
+		<c:if test="${ article.nextArticleId != -1 }">
+	  		<li class="next">
+	  			<a href="${pageContext.request.contextPath}/jsp/blog/blog_view?id=${ article.nextArticleId }#title" rel="next">
+	  				下一篇
+	  			</a>
+	  		</li>
+  		</c:if>
+	</ul>		
 </div>
     
     
