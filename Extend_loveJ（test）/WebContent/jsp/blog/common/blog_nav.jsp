@@ -5,11 +5,9 @@
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item" href="#">Home</a>
-          <a class="blog-nav-item" href="#">New features</a>
-          <a class="blog-nav-item" href="#">Press</a>
-          <a class="blog-nav-item" href="#">New hires</a>
-          <a class="blog-nav-item" href="#">About</a>
+          <a class="blog-nav-item" href="${pageContext.request.contextPath}/">Home</a>
+          <a class="blog-nav-item" href="${pageContext.request.contextPath}/jsp/blog/blog_contact">Contact</a>
+          <a class="blog-nav-item" href="${pageContext.request.contextPath}/jsp/blog/blog_contact">About</a>
         </nav>
       </div>
     </div>

@@ -27,7 +27,14 @@
 <!-- 				面包屑功能的开发 -->
 				<br>
 				<ol class="breadcrumb">
-					<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+					<li>
+						<a href="${ pageContext.request.contextPath}">
+							<span class="glyphicon glyphicon-home"></span>
+						</a>
+					</li>
+					<li  class="active">
+						搜索结果
+					</li>
 				</ol>
 				<%@ include file="common/blog_body.jsp" %>
 			</div>
@@ -38,9 +45,7 @@
 			</div>
 		</div>
 
-<!-- 		<div class="footer1"> -->
-			<%@ include file="common/blog_footer.jsp" %>
-<!-- 		</div> -->
+		<%@ include file="common/blog_footer.jsp" %>
 
 	</body>
 </html>

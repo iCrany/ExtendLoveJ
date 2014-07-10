@@ -28,7 +28,20 @@
 <!-- 				面包屑功能的开发 -->	
 				<br>
 				<ol class="breadcrumb">
-					<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+					<li>
+						<a href="${pageContext.request.contextPath}">
+							<span class="glyphicon glyphicon-home"></span>
+						</a>
+					</li>
+					<li>
+						<c:forEach items="${ article.categoryList }" var="category" varStatus="secondItemStatus">
+							<a href="${pageContext.request.contextPath}/jsp/blog/blog_serarch?categoryId=${ category.id }"><c:out value="${ category.name }"/></a>
+							<c:if test="${ secondItemStatus.last == false }">•</c:if>
+						</c:forEach>
+					</li>
+					<li  class="active">
+						正文
+					</li>					
 				</ol>
 				<%@ include file="common/blog_single.jsp" %>
 				<%@ include file="common/blog_comment.jsp" %>
