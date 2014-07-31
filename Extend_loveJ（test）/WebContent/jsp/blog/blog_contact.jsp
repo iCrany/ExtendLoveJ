@@ -27,8 +27,9 @@
 <!-- 				面包屑功能的开发 -->
 				<ol class="breadcrumb">
 					<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+					<li>About</li>
 				</ol>
-				<%@ include file="common/blog_single.jsp" %>
+				<%@ include file="common/blog_single_contact.jsp" %>
 				<%@ include file="common/blog_comment.jsp" %>
 			</div>
 			

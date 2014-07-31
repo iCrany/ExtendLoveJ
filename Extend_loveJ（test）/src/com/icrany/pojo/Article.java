@@ -178,6 +178,12 @@ public class Article implements Serializable{
 	
 	private Date topTime;//置顶时间
 	
+	private String articleType;//判断是普通文章还是独立页面或者是模版
+	
+	private int parentId;//该文章的父文章
+	
+	private int menuOrder;//若是独立页面，在导航条中的显示循序
+	
 	private int categoryId;//TODO:这个也是没有用的了，只是还没有删除
 	
 	private int tagId;//TODO:这个也是没有用的了，只是还没有删除
@@ -214,6 +220,30 @@ public class Article implements Serializable{
 
 	public void setNextArticleId(int nextArticleId) {
 		this.nextArticleId = nextArticleId;
+	}
+
+	public String getArticleType() {
+		return articleType;
+	}
+
+	public void setArticleType(String articleType) {
+		this.articleType = articleType;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
+	public int getMenuOrder() {
+		return menuOrder;
+	}
+
+	public void setMenuOrder(int menuOrder) {
+		this.menuOrder = menuOrder;
 	}
 
 }

@@ -30,8 +30,8 @@ public class ArticleDaoImp implements ArticleDao{
 		Connection conn = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into article (content,postTime,quote,status,summary,title,view,trash,topTime) "
-				+ "values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into article (content,postTime,articleType,status,summary,title,view,trash,topTime,menuOrder,parentId) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?)";
 		conn = DbUtil.getConnection();
 		
 		try {
@@ -39,13 +39,15 @@ public class ArticleDaoImp implements ArticleDao{
 			pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, entity.getContent());
 			pstmt.setTimestamp(2, new Timestamp(entity.getPostTime().getTime()));
-			pstmt.setString(3,entity.getQuote());
+			pstmt.setString(3,entity.getArticleType());
 			pstmt.setString(4,entity.getStatus());
 			pstmt.setString(5, entity.getSummary());
 			pstmt.setString(6,entity.getTitle());
 			pstmt.setInt(7, entity.getView());
 			pstmt.setBoolean(8, entity.isTrash());
 			pstmt.setTimestamp(9,  new Timestamp(entity.getTopTime().getTime()));
+			pstmt.setInt(10, entity.getMenuOrder());
+			pstmt.setInt(11, entity.getParentId());
 			
 			pstmt.executeUpdate();
 			rs = pstmt.getGeneratedKeys();
@@ -75,7 +77,7 @@ public class ArticleDaoImp implements ArticleDao{
 		Connection conn = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-		String sql = "update article set content=?,postTime=?,quote=?,status=?,summary=?,title=?,view=?,trash=?,topTime=?,modifyTime=? where id=?";
+		String sql = "update article set content=?,postTime=?,articleType=?,status=?,summary=?,title=?,view=?,trash=?,topTime=?,modifyTime=? where id=?";
 		conn = DbUtil.getConnection();
 		
 		try {
@@ -83,7 +85,7 @@ public class ArticleDaoImp implements ArticleDao{
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, entity.getContent());
 			pstmt.setTimestamp(2, new Timestamp(entity.getPostTime().getTime()));
-			pstmt.setString(3,entity.getQuote());
+			pstmt.setString(3,entity.getArticleType());
 			pstmt.setString(4,entity.getStatus());
 			pstmt.setString(5, entity.getSummary());
 			pstmt.setString(6,entity.getTitle());
@@ -343,12 +345,15 @@ public class ArticleDaoImp implements ArticleDao{
 			entity.setId(rs.getInt("id"));
 			entity.setModifyTime(rs.getTimestamp("modifyTime"));
 			entity.setPostTime(rs.getTimestamp("postTime"));
-			entity.setQuote(rs.getString("quote"));
 			entity.setStatus(rs.getString("status"));
 			entity.setSummary(rs.getString("summary"));
 			entity.setTopTime(rs.getTimestamp("topTime"));
 			entity.setView(rs.getInt("view"));
 			entity.setTrash(rs.getBoolean("trash"));
+			entity.setArticleType(rs.getString("articleType"));
+			entity.setMenuOrder(rs.getInt("menuOrder"));
+			entity.setParentId(rs.getInt("parentId"));
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
