@@ -91,7 +91,7 @@ public class SearchController {
 			
 		}else if(request.getParameter("categoryId") != null){
 			//查找这个分类目录下的所有文章出来
-			
+			System.out.println("ni hao ");
 			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 			articleList = searchByCategoryId(categoryId);
 			
@@ -108,6 +108,7 @@ public class SearchController {
 		}
 		
 		System.out.println("==================serarch=====================");
+		
 		//分页的处理
 		Pager pager = new Pager();
 		if(currentPage == null) currentPage = 1;

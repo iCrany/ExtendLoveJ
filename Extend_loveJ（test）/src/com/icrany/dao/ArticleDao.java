@@ -10,7 +10,9 @@ public interface ArticleDao {
 	public boolean update(Article entity);
 	public boolean delete(Article entity);
 	public Article findById(int id);
+	public List<Article> findPage();
 	public List<Article> findAllArticle();
+	public List<Article> findNavMenuItem();
 	public List<Integer> findAllArticleId();
 	public List<Article> findNewestArticle();
 	public List<Article> findByFuzzyName(String key);

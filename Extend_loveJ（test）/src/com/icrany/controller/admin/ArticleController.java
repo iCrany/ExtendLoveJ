@@ -133,6 +133,7 @@ public class ArticleController {
 		article.setView(0);
 		article.setSummary(summary);
 		article.setTrash(false);//文章创建的时候 这个 trash 属性都是默认的为 false, 即没有被删除
+		article.setArticleType("post");//默认的文章发表类型都为这个 post 类型
 		createReferenceData(article,map);
 	}
 	

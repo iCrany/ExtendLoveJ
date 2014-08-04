@@ -9,7 +9,9 @@ public interface ArticleService{
 	public boolean delete(Article entity);
 	public Article queryById(int id);
 	public boolean update(Article entity);
+	public List<Article> findPage();
 	public List<Article> getAllArticle();
+	public List<Article> findNavMenuItem();
 	public List<Article> findNewestArticle();
 	public List<Article> findByFuzzyName(String key);
 }

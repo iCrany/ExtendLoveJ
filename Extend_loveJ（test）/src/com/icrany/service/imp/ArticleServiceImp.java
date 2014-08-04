@@ -161,4 +161,14 @@ public class ArticleServiceImp implements ArticleService{
 		
 		return articleList;
 	}
+
+	@Override
+	public List<Article> findPage() {
+		return articleDao.findPage();
+	}
+
+	@Override
+	public List<Article> findNavMenuItem() {
+		return articleDao.findNavMenuItem();
+	}
 }

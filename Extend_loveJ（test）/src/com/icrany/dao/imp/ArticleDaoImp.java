@@ -293,6 +293,78 @@ public class ArticleDaoImp implements ArticleDao{
 	}
 	
 	/**
+	 * 寻找文章属性为 page 的文章,寻找所有的独立页面出来
+	 * @return
+	 */
+	public List<Article> findPage(){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from article where articleType = page";
+		List<Article> articleList = new ArrayList<Article>();
+		
+		conn = DbUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Article entity = new Article();
+				entity = fillArticle(entity,rs);
+				articleList.add(entity);
+				
+			}
+			return articleList;
+		} catch (SQLException e) {
+			logger.error("获取独立页面类型的文章出错 " + e.getStackTrace());
+			e.printStackTrace();
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}		
+
+		return null;		
+	}
+	
+	/**
+	 * 寻找所有 文章属性为 nav_menu_item 的文章
+	 * @return
+	 */
+	public List<Article> findNavMenuItem(){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from article where articleType = nav_menu_item order by menuOrder asc ";
+		List<Article> articleList = new ArrayList<Article>();
+		
+		conn = DbUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Article entity = new Article();
+				entity = fillArticle(entity,rs);
+				articleList.add(entity);
+				
+			}
+			return articleList;
+		} catch (SQLException e) {
+			logger.error("获取文章类型为 首页导航的 文章出错 " + e.getStackTrace());
+			e.printStackTrace();
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}		
+
+		return null;		
+	}
+	
+	/**
 	 * TODO：这里根据关键字来进行搜索，目前暂时只支持单个关键字搜索，而且是只能根据文章的标题来进行正则表达式的匹配，需要改进
 	 * @param key
 	 * @return
@@ -336,7 +408,6 @@ public class ArticleDaoImp implements ArticleDao{
 	 * @param rs
 	 * @return
 	 */
-	
 	public Article fillArticle(Article entity,ResultSet rs){
 		
 		try {
