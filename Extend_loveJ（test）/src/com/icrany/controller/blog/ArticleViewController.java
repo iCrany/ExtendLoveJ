@@ -2,6 +2,7 @@ package com.icrany.controller.blog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.directwebremoting.util.Logger;
@@ -102,5 +103,10 @@ public class ArticleViewController {
 		
 		//TODO:最新的五个友情链接
 		map.put("newestLink", linkService.findNewestLink());
+
+		//这里是处理页面中的导航条的部分 对应的List 为 navItems , 类型值为 List<Article>
+		List<Article> navItems = articleService.findPage();
+		map.put("navItems", navItems);		
+		
 	}	
 }

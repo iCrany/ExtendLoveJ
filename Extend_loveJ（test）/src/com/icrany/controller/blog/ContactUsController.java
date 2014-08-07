@@ -2,7 +2,10 @@ package com.icrany.controller.blog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.icrany.pojo.Article;
 import com.icrany.pojo.User;
 import com.icrany.service.ArticleService;
 import com.icrany.service.CategoryService;
@@ -62,10 +66,11 @@ public class ContactUsController {
 	}
 	
 	@RequestMapping(value="/blog_contact")
-	public String showContactUs(Map<String,Object> map){
-		int articleId = 0;//TODO:自己预先定义一个默认的 联系人 页面的 id,这个问题还没有解决
-//		articleId = articleService.f
-//		createReferenceData(map,articleId);
+	public String showContactUs(Map<String,Object> map,HttpServletRequest request){
+		int articleId = Integer.parseInt(request.getParameter("id"));//TODO:自己预先定义一个默认的 联系人 页面的 id,这个问题还没有解决
+//		logger.debug("articleId = " + articleId);
+		System.out.println("articleId = " + articleId);
+		createReferenceData(map,articleId);
 		return CONTACT_BLOG;
 	}
 	
@@ -87,6 +92,10 @@ public class ContactUsController {
 		
 		//TODO:最新的五个友情链接
 		map.put("newestLink", linkService.findNewestLink());
+		
+		//这里是处理页面中的导航条的部分 对应的List 为 navItems , 类型值为 List<Article>
+		List<Article> navItems = articleService.findPage();
+		map.put("navItems", navItems);		
 	}		
 
 }

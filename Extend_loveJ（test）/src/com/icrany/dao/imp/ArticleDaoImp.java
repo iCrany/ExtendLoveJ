@@ -143,6 +143,32 @@ public class ArticleDaoImp implements ArticleDao{
 		return false;
 	}
 	
+	public boolean deleteAllPage(){
+		
+		Connection conn = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from article  where articleType = 'page'";
+		conn = DbUtil.getConnection();
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			if(pstmt.execute()){
+				return true;
+			}
+		} catch (SQLException e) {
+			logger.error("删除所有的独立页面失败"+e.getStackTrace());
+			e.printStackTrace();
+		}finally{
+			DbUtil.close(rs);
+			DbUtil.close(pstmt);
+			DbUtil.close(conn);
+		}		
+		return false;		
+	}
+	
 	/**
 	 * 根据文章的唯一标识符 id 来查询文章,成功返回 文章实体 否则返回 null
 	 * @param id
@@ -190,7 +216,7 @@ public class ArticleDaoImp implements ArticleDao{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from article order by postTime desc";//根据发表的日期来排序显示
+		String sql = "select * from article where articleType = 'post' order by postTime desc";//根据发表的日期来排序显示
 		List<Article> articleList = new ArrayList<Article>();
 		
 		conn = DbUtil.getConnection();
@@ -301,7 +327,7 @@ public class ArticleDaoImp implements ArticleDao{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from article where articleType = page";
+		String sql = "select * from article where articleType = 'page'";
 		List<Article> articleList = new ArrayList<Article>();
 		
 		conn = DbUtil.getConnection();
@@ -337,7 +363,7 @@ public class ArticleDaoImp implements ArticleDao{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from article where articleType = nav_menu_item order by menuOrder asc ";
+		String sql = "select * from article where articleType = 'nav_menu_item' order by menuOrder asc ";
 		List<Article> articleList = new ArrayList<Article>();
 		
 		conn = DbUtil.getConnection();

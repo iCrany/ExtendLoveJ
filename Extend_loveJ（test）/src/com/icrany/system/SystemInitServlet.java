@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -15,10 +14,13 @@ import javax.servlet.http.HttpServlet;
 
 import org.directwebremoting.util.Logger;
 
+import com.icrany.pojo.Article;
 import com.icrany.pojo.SiteConfig;
 import com.icrany.pojo.User;
+import com.icrany.service.ArticleService;
 import com.icrany.service.SiteConfigService;
 import com.icrany.service.UserService;
+import com.icrany.service.imp.ArticleServiceImp;
 import com.icrany.service.imp.SiteConfigServiceImp;
 import com.icrany.service.imp.UserServiceImp;
 
@@ -52,6 +54,7 @@ public class SystemInitServlet extends HttpServlet {
 			//最后就是数据库中的一些初始化工作了
 			try {
 				initDataBase();
+				initPageTemplate();
 			} catch (ParseException e) {
 				logger.error("初始数据库的日期转换出错了 "+e.getStackTrace());
 				e.printStackTrace();
@@ -71,6 +74,57 @@ public class SystemInitServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
+    /**
+     * 这里用来初始化不同的独立页面模版 这里暂时只支持 关于我  留言板  文章归档 三种不同的独立页面 AboutMe ReaderWalls SiteMap 
+     */
+    public void initPageTemplate(){
+    	ArticleService articleService = new ArticleServiceImp();
+    	
+    	List<Article> articleList = articleService.findPage();
+    	
+    	//现在只支持三种不同的页面模版，若数据库中少于三种 先删除，然后从新生成
+    	if(articleList == null || articleList.size() < 3){
+    		logger.debug("开始创建三个模版页面了");
+    		articleService.deleteAllPage();//先删了
+    		
+    		Article aboutMe = new Article();
+    		prepareSomeData(aboutMe,"AboutMe","page");
+    		aboutMe.setContent("this is about me");
+    		
+    		Article readerWalls = new Article();
+    		prepareSomeData(readerWalls,"ReaderWalls","page");
+    		readerWalls.setContent("this is readerWalls");
+    		
+    		Article siteMap = new Article();
+    		prepareSomeData(siteMap,"SiteMap","page");
+    		siteMap.setContent("this is site map");
+    		
+    		articleService.insert(aboutMe);
+    		articleService.insert(readerWalls);
+    		articleService.insert(siteMap);
+    	}
+    }
+    
+    /**
+     * 为文章做一些初始化的准备
+     * @param article
+     * @param title
+     * @param articleType
+     */
+    public void prepareSomeData(Article article,String title,String articleType){
+    	article.setMenuOrder(1);
+    	article.setView(0);
+    	article.setPostTime(new Date());
+    	article.setTopTime(new Date());
+    	article.setModifyTime(new Date());
+    	article.setTitle(title);
+    	article.setArticleType(articleType);
+    }
+    
+    /**
+     * 初始化数据库中的 用户 等信息
+     * @throws ParseException
+     */
     public void initDataBase() throws ParseException{
     	
     	//这里数据库首先尝试的是直接使用 new 来获取相对应的对象，看看会有什么情况发生

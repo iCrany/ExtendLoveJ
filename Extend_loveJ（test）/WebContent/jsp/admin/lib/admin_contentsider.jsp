@@ -10,4 +10,6 @@
  <li><a href="<%=request.getContextPath()%>/jsp/admin/content/link_control">管理链接</a></li>
  <li><a href="<%=request.getContextPath()%>/jsp/admin/content/link_create">创建链接</a></li>
  <li><a href="<%=request.getContextPath()%>/jsp/admin/content/comment_control">管理评论</a></li>
+ <li><a href="<%=request.getContextPath()%>/jsp/admin/content/page_control">管理页面</a></li>
+ <li><a href="<%=request.getContextPath()%>/jsp/admin/content/page_create">创建页面</a></li>
 </ul>

@@ -6,8 +6,11 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item" href="${pageContext.request.contextPath}/">Home</a>
-          <a class="blog-nav-item" href="${pageContext.request.contextPath}/jsp/blog/blog_contact">Contact</a>
-          <a class="blog-nav-item" href="${pageContext.request.contextPath}/jsp/blog/blog_contact">About</a>
+          <c:forEach items="${ navItems }" var="nav" varStatus="itemStatus">
+          	 <a class="blog-nav-item" href="${pageContext.request.contextPath}/jsp/blog/blog_contact?id=${ nav.id }">${ nav.title }</a>
+          </c:forEach>
+<%--           <a class="blog-nav-item" href="${pageContext.request.contextPath}/jsp/blog/blog_contact">Contact</a> --%>
+<%--           <a class="blog-nav-item" href="${pageContext.request.contextPath}/jsp/blog/blog_contact">About</a> --%>
         </nav>
       </div>
     </div>

@@ -171,4 +171,9 @@ public class ArticleServiceImp implements ArticleService{
 	public List<Article> findNavMenuItem() {
 		return articleDao.findNavMenuItem();
 	}
+	
+	@Override
+	public boolean deleteAllPage(){
+		return articleDao.deleteAllPage();
+	}
 }

@@ -178,7 +178,7 @@ public class Article implements Serializable{
 	
 	private Date topTime;//置顶时间
 	
-	private String articleType;//判断是普通文章还是独立页面或者是模版
+	private String articleType;//判断是普通文章还是独立页面或者是模版     1：nav_menu_item 首页的导航条部分 2：page 独立页面 3：post 普通文章
 	
 	private int parentId;//该文章的父文章
 	

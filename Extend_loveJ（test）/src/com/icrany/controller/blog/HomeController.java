@@ -122,5 +122,9 @@ public class HomeController {
 		
 		//TODO:最新的五个友情链接
 		map.put("newestLink", linkService.findNewestLink());
+		
+		//这里是处理页面中的导航条的部分 对应的List 为 navItems , 类型值为 List<Article>
+		List<Article> navItems = articleService.findPage();
+		map.put("navItems", navItems);
 	}
 }

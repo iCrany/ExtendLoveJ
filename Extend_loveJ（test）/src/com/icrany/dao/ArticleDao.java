@@ -9,6 +9,7 @@ public interface ArticleDao {
 	public int insert(Article entity);
 	public boolean update(Article entity);
 	public boolean delete(Article entity);
+	public boolean deleteAllPage();
 	public Article findById(int id);
 	public List<Article> findPage();
 	public List<Article> findAllArticle();
