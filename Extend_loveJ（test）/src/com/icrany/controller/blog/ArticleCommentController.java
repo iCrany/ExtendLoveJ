@@ -2,6 +2,7 @@ package com.icrany.controller.blog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.icrany.pojo.Article;
 import com.icrany.pojo.Comment;
 import com.icrany.pojo.User;
 import com.icrany.service.ArticleService;
@@ -103,6 +105,9 @@ public class ArticleCommentController {
 		
 		//TODO:最新的五个友情链接
 		map.put("newestLink", linkService.findNewestLink());
+		
+		List<Article> navItems = articleService.findPage();
+		map.put("navItems", navItems);		
 	}	
 
 }

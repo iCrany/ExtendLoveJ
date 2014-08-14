@@ -27,6 +27,8 @@ public class PageController {
 	
 	private static final String CREATE_PAGE = "page_create";
 	
+	private static final String CONTROL_PAGE = "page_control";
+	
 	@Autowired
 	private static ArticleService articleService = new ArticleServiceImp();
 	
@@ -66,6 +68,12 @@ public class PageController {
 	public String createMethodGet(Map<String,Object> map){
 		
 		return CREATE_PAGE;
+	}
+	
+	@RequestMapping(value="/page_control",method=RequestMethod.GET)
+	public String controlMethodGet(Map<String,Object> map){
+		
+		return CONTROL_PAGE;
 	}
 	
 	/**

@@ -217,6 +217,9 @@ public class SearchController {
 		
 		//TODO:最新的五个友情链接
 		map.put("newestLink", linkService.findNewestLink());
+		
+		List<Article> navItems = articleService.findPage();
+		map.put("navItems", navItems);		
 	}	
 	
 	

@@ -25,6 +25,7 @@
 		<div class="row">
 			<div class="col-sm-8 blog-main"> <!--  col-md-6 -->
 <!-- 				面包屑功能的开发 -->
+				<br>
 				<ol class="breadcrumb">
 					<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
 					<li>About</li>
