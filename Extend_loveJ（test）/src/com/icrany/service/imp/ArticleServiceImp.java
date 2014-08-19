@@ -3,6 +3,7 @@ package com.icrany.service.imp;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.stereotype.Service;
 
 import com.icrany.dao.ArticleDao;
 import com.icrany.dao.CategoryArticleDao;
@@ -22,6 +23,7 @@ import com.icrany.pojo.Comment;
 import com.icrany.pojo.Tag;
 import com.icrany.service.ArticleService;
 
+@Service
 public class ArticleServiceImp implements ArticleService{
 	
 	private static final Logger logger = Logger.getLogger(ArticleServiceImp.class);

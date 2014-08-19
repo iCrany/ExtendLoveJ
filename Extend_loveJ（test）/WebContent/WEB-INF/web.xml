@@ -50,13 +50,13 @@
     <url-pattern>/kindEditorUpload</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>SystemInitServlet</servlet-name>
-  	<servlet-class>com.icrany.system.SystemInitServlet</servlet-class>
-  	<load-on-startup>10</load-on-startup>
+    <servlet-name>SystemInitServlet</servlet-name>
+    <servlet-class>com.icrany.system.SystemInitServlet</servlet-class>
+    <load-on-startup>10</load-on-startup>
   </servlet>
   <servlet>
-  	<servlet-name>SystemInitServlet</servlet-name>
-  	<servlet-class>com.icrany.system.SystemInitServlet</servlet-class>
-  	<load-on-startup>9</load-on-startup>
+    <servlet-name>SystemInitServlet</servlet-name>
+    <servlet-class>com.icrany.system.SystemInitServlet</servlet-class>
+    <load-on-startup>9</load-on-startup>
   </servlet>
 </web-app>
