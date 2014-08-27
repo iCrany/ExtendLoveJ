@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -38,19 +39,26 @@ public class ArticleViewController {
 	
 	private static final String VIEW_BLOG = "blog_view";
 	
-	private static CategoryService categoryService = new CategoryServiceImp();
+	@Autowired
+	private CategoryService categoryService ;
 
-	private static TagService tagService = new TagServiceImp();
+	@Autowired
+	private TagService tagService ;
 	
-	private static CommentService commentService = new CommentServiceImp();
+	@Autowired
+	private CommentService commentService ;
 	
-	private static SiteConfigService siteConfigService = new SiteConfigServiceImp();
+	@Autowired
+	private SiteConfigService siteConfigService ;
 	
-	private static LinkService linkService = new LinkServiceImp();
+	@Autowired
+	private LinkService linkService ;
 	
-	private static UserService userService = new UserServiceImp();
+	@Autowired
+	private UserService userService ;
 	
-	private static ArticleService articleService = new ArticleServiceImp();
+	@Autowired
+	private ArticleService articleService ;
 	
 	/**
 	 * 这个类是用来处理 类型之间的转换的问题，如 date --> String 之间的转换

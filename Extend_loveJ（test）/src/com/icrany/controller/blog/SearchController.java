@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -49,23 +50,32 @@ public class SearchController {
 	
 	private static final String SEARCH_BLOG = "/jsp/blog/blog_search";
 	
-	private static CategoryService categoryService = new CategoryServiceImp();
+	@Autowired
+	private CategoryService categoryService ;
 
-	private static TagService tagService = new TagServiceImp();
+	@Autowired
+	private TagService tagService ;
 	
-	private static CommentService commentService = new CommentServiceImp();
+	@Autowired
+	private CommentService commentService ;
 	
-	private static SiteConfigService siteConfigService = new SiteConfigServiceImp();
+	@Autowired
+	private SiteConfigService siteConfigService ;
 	
-	private static LinkService linkService = new LinkServiceImp();
+	@Autowired
+	private LinkService linkService ;
 	
-	private static UserService userService = new UserServiceImp();
+	@Autowired
+	private UserService userService ;
 	
-	private static ArticleService articleService = new ArticleServiceImp();
+	@Autowired
+	private ArticleService articleService ;
 	
-	private static CategoryArticleService categoryArticleService = new CategoryArticleServiceImp();
+	@Autowired
+	private CategoryArticleService categoryArticleService ;
 
-	private static TagArticleService tagArticleService = new TagArticleServiceImp();
+	@Autowired
+	private TagArticleService tagArticleService ;
 	
 	/**
 	 * 这个类是用来处理 类型之间的转换的问题，如 date --> String 之间的转换

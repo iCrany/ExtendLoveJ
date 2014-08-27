@@ -3,18 +3,20 @@ package com.icrany.service.imp;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.icrany.dao.TagArticleDao;
 import com.icrany.dao.imp.TagArticleDaoImp;
-import com.icrany.pojo.CategoryArticle;
 import com.icrany.pojo.TagArticle;
 import com.icrany.service.TagArticleService;
-
+@Service
 public class TagArticleServiceImp implements TagArticleService {
 
 	private static final Logger logger = Logger.getLogger(TagArticleServiceImp.class);
 	
-	private static TagArticleDao tagArticleDao = new TagArticleDaoImp();
+	@Autowired
+	private TagArticleDao tagArticleDao ;
 	
 	@Override
 	public int insert(TagArticle entity) {

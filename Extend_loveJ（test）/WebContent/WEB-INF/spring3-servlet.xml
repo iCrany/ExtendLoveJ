@@ -11,11 +11,12 @@
            http://www.springframework.org/schema/mvc 
            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
     
-<!--     启动注解配置 这里会默认装配好一个 LocalValidatorFactoryBean -->
+<!--     启动注解配置 这里会默认装配好一个 LocalValidatorFactoryBean 是注解配置生效-->
     <mvc:annotation-driven />
     
 <!--     加载静态资源，像 css 等静态资源 -->
     <mvc:default-servlet-handler/>  
+    
 <!--     配置一开始的首页面 -->
 	<mvc:view-controller path="/" view-name="forward:jsp/blog/home"/>
 	

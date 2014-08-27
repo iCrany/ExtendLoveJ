@@ -26,7 +26,7 @@ public class LinkController {
 	public static final Logger logger = Logger.getLogger(LinkController.class);
 	
 	@Autowired
-	public static LinkService linkService = new LinkServiceImp();
+	public LinkService linkService ;
 	
 	public static final String CONTROL_LINK = "link_control";
 	

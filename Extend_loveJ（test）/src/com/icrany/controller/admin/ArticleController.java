@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -44,19 +45,20 @@ public class ArticleController {
 	private static String CONTROL_ARTICLE = "article_control";
 
 	@Autowired
-	private static ArticleService articleService = new ArticleServiceImp();
+//	@Qualifier("articleServiceImp")//这个可以进一步缩小对应的bean的类型
+	private ArticleService articleService ;
 	
 	@Autowired
-	private static CategoryService categoryService = new CategoryServiceImp();
+	private CategoryService categoryService ;
 	
 	@Autowired
-	private static TagService tagService = new TagServiceImp();
+	private TagService tagService ;
 	
 	@Autowired
-	private static CategoryArticleService categoryArticleService = new CategoryArticleServiceImp();
+	private CategoryArticleService categoryArticleService ;
 	
 	@Autowired
-	private static TagArticleService tagArticleService = new TagArticleServiceImp();	
+	private TagArticleService tagArticleService ;	
 	
 	ArticleController(){
 //		这里有成功的初始化

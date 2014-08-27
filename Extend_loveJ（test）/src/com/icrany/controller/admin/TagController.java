@@ -21,7 +21,7 @@ public class TagController {
 	public static final Logger logger = Logger.getLogger(TagController.class);
 	
 	@Autowired
-	public static TagService tagService = new TagServiceImp();
+	public TagService tagService ;
 	
 	public static final String CONTROL_TAG = "tag_control";
 	

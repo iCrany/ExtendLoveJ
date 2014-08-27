@@ -30,7 +30,7 @@ public class PageController {
 	private static final String CONTROL_PAGE = "page_control";
 	
 	@Autowired
-	private static ArticleService articleService = new ArticleServiceImp();
+	private ArticleService articleService ;
 	
 	/**
 	 * 这个类是用来处理 类型之间的转换的问题，如 date --> String 之间的转换

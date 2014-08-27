@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -39,19 +40,26 @@ public class ContactUsController {
 	
 	private static final String CONTACT_BLOG = "/jsp/blog/blog_contact";
 	
-	private static UserService userService = new UserServiceImp();
+	@Autowired
+	private UserService userService ;
 	
-	private static SiteConfigService siteConfigService = new SiteConfigServiceImp();
+	@Autowired
+	private SiteConfigService siteConfigService ;
 	
-	private static LinkService linkService = new LinkServiceImp();
+	@Autowired
+	private LinkService linkService ;
 	
-	private static CommentService commentService = new CommentServiceImp();
+	@Autowired
+	private CommentService commentService ;
 	
-	private static ArticleService articleService = new ArticleServiceImp();
+	@Autowired
+	private ArticleService articleService ;
 	
-	private static CategoryService categoryService = new CategoryServiceImp();
+	@Autowired
+	private CategoryService categoryService ;
 	
-	private static TagService tagService = new TagServiceImp();	
+	@Autowired
+	private TagService tagService ;	
 	
 	
 	/**

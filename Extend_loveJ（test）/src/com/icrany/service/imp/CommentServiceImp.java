@@ -3,17 +3,20 @@ package com.icrany.service.imp;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.icrany.dao.CommentDao;
 import com.icrany.dao.imp.CommentDaoImp;
 import com.icrany.pojo.Comment;
 import com.icrany.service.CommentService;
-
+@Service
 public class CommentServiceImp implements CommentService {
 
 	private static final Logger logger = Logger.getLogger(CommentServiceImp.class);
 	
-	private static CommentDao commentDao = new CommentDaoImp();
+	@Autowired
+	private CommentDao commentDao ;
 	
 	@Override
 	public boolean insert(Comment entity) {

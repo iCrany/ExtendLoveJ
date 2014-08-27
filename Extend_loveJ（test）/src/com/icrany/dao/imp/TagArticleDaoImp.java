@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.stereotype.Repository;
 
 import com.icrany.dao.TagArticleDao;
 import com.icrany.pojo.TagArticle;
 import com.icrany.util.DbUtil;
 import com.mysql.jdbc.Statement;
 
+@Repository
 public class TagArticleDaoImp implements TagArticleDao {
 
 	private static final Logger logger = Logger.getLogger(TagArticleDaoImp.class);

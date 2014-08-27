@@ -4,18 +4,19 @@ import java.util.List;
 
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.icrany.dao.UserDao;
 import com.icrany.dao.imp.UserDaoImp;
 import com.icrany.pojo.User;
 import com.icrany.service.UserService;
-
+@Service
 public class UserServiceImp implements UserService {
 
 	private static final Logger logger = Logger.getLogger(UserServiceImp.class);
 	
 	@Autowired
-	private static UserDao userDao = new UserDaoImp();
+	private UserDao userDao ;
 	
 	@Override
 	public boolean insert(User entity) {

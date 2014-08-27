@@ -6,16 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import com.icrany.dao.ArticleDao;
 import com.icrany.pojo.Article;
 import com.icrany.util.DbUtil;
 import com.mysql.jdbc.Statement;
 
+@Repository
 public class ArticleDaoImp implements ArticleDao{
 
 	private final Logger logger = Logger.getLogger(this.getClass());

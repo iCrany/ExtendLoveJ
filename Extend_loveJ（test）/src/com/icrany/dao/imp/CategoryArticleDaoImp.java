@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.stereotype.Repository;
 
 import com.icrany.dao.CategoryArticleDao;
 import com.icrany.pojo.CategoryArticle;
 import com.icrany.util.DbUtil;
 
+@Repository
 public class CategoryArticleDaoImp implements CategoryArticleDao {
 
 	private static final Logger logger = Logger.getLogger(CategoryArticleDao.class);

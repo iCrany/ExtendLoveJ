@@ -59,4 +59,7 @@
     <servlet-class>com.icrany.system.SystemInitServlet</servlet-class>
     <load-on-startup>9</load-on-startup>
   </servlet>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 </web-app>

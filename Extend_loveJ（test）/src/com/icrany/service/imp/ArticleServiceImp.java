@@ -3,6 +3,8 @@ package com.icrany.service.imp;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.icrany.dao.ArticleDao;
@@ -28,17 +30,23 @@ public class ArticleServiceImp implements ArticleService{
 	
 	private static final Logger logger = Logger.getLogger(ArticleServiceImp.class);
 	
-	private static ArticleDao articleDao = new ArticleDaoImp();
+	@Autowired
+	private ArticleDao articleDao ;
 	
-	private static CommentDao commentDao = new CommentDaoImp();
+	@Autowired
+	private CommentDao commentDao ;
 	
-	private static CategoryDao categoryDao = new CategoryDaoImp();
+	@Autowired
+	private CategoryDao categoryDao ;
 	
-	private static CategoryArticleDao categoryArticleDao = new CategoryArticleDaoImp();
+	@Autowired
+	private CategoryArticleDao categoryArticleDao ;
 	
-	private static TagDao tagDao = new TagDaoImp();
+	@Autowired
+	private TagDao tagDao ;
 	
-	private static TagArticleDao tagArticleDao = new TagArticleDaoImp();
+	@Autowired
+	private TagArticleDao tagArticleDao ;
 	
 	public int insert(Article entity){
 		return articleDao.insert(entity);

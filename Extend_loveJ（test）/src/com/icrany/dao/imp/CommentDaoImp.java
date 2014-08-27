@@ -3,7 +3,6 @@ package com.icrany.dao.imp;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,14 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.stereotype.Repository;
 
 import com.icrany.dao.CommentDao;
-import com.icrany.dao.TagDao;
-import com.icrany.pojo.Article;
 import com.icrany.pojo.Comment;
 import com.icrany.util.DbUtil;
 
-
+@Repository
 public class CommentDaoImp implements CommentDao {
 	
 	private static final Logger logger = Logger.getLogger(CommentDaoImp.class);

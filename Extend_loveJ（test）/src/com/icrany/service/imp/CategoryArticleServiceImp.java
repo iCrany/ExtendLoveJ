@@ -3,17 +3,20 @@ package com.icrany.service.imp;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.icrany.dao.CategoryArticleDao;
 import com.icrany.dao.imp.CategoryArticleDaoImp;
 import com.icrany.pojo.CategoryArticle;
 import com.icrany.service.CategoryArticleService;
-
+@Service
 public class CategoryArticleServiceImp implements CategoryArticleService{
 
 	private static final Logger logger = Logger.getLogger(CategoryArticleServiceImp.class);
 	
-	private static CategoryArticleDao categoryArticleDao = new CategoryArticleDaoImp();
+	@Autowired
+	private CategoryArticleDao categoryArticleDao ;
 	
 	@Override
 	public int insert(CategoryArticle entity) {

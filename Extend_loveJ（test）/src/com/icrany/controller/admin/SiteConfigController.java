@@ -3,6 +3,7 @@ package com.icrany.controller.admin;
 import java.util.Map;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,8 @@ public class SiteConfigController {
 
 	private static final Logger logger = Logger.getLogger(SiteConfigController.class);
 	
-	private static SiteConfigService siteConfigService = new SiteConfigServiceImp(); 
+	@Autowired
+	private SiteConfigService siteConfigService ;
 	
 	private static final String CONTROL_CONFIG = "config_control";
 	

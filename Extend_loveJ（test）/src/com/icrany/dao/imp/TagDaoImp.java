@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.stereotype.Repository;
 
 import com.icrany.dao.TagDao;
 import com.icrany.pojo.Tag;
 import com.icrany.util.DbUtil;
 
+@Repository
 public class TagDaoImp implements TagDao {
 	
 	private static final Logger logger = Logger.getLogger(TagDao.class);

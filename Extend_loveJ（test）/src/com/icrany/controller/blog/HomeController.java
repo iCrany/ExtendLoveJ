@@ -8,13 +8,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.icrany.pojo.Article;
 import com.icrany.pojo.Pager;
@@ -42,19 +42,26 @@ public class HomeController {
 	
 	private static final String HOME = "/jsp/blog/home";
 	
-	private static CategoryService categoryService = new CategoryServiceImp();
-
-	private static TagService tagService = new TagServiceImp();
+	@Autowired
+	private CategoryService categoryService ;
 	
-	private static CommentService commentService = new CommentServiceImp();
+	@Autowired
+	private TagService tagService ;
 	
-	private static SiteConfigService siteConfigService = new SiteConfigServiceImp();
+	@Autowired
+	private CommentService commentService ;
 	
-	private static LinkService linkService = new LinkServiceImp();
+	@Autowired
+	private SiteConfigService siteConfigService ;
 	
-	private static UserService userService = new UserServiceImp();
+	@Autowired
+	private LinkService linkService ;
 	
-	private static ArticleService articleService = new ArticleServiceImp();
+	@Autowired
+	private UserService userService ;
+	
+	@Autowired
+	private ArticleService articleService ;
 	
 	/**
 	 * 这个类是用来处理 类型之间的转换的问题，如 date --> String 之间的转换

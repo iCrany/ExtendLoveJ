@@ -3,17 +3,19 @@ package com.icrany.service.imp;
 import java.util.List;
 
 import org.directwebremoting.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.icrany.dao.LinkDao;
-import com.icrany.dao.imp.LinkDaoImp;
 import com.icrany.pojo.Link;
 import com.icrany.service.LinkService;
-
+@Service
 public class LinkServiceImp implements LinkService {
 
 	private static final Logger logger = Logger.getLogger(LinkServiceImp.class);
 	
-	private static LinkDao linkDao = new LinkDaoImp();
+	@Autowired
+	private LinkDao linkDao ;
 	
 	@Override
 	public boolean insert(Link entity) {

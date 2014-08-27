@@ -31,7 +31,7 @@ public class CategoryController {
 	private static final Logger logger = Logger.getLogger(CategoryController.class);
 	
 	@Autowired
-	private static CategoryService categoryService = new CategoryServiceImp();
+	private CategoryService categoryService ;
 	
 	private static final String CONTROL_CATEGORY = "category_control";
 	

@@ -8,15 +8,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.apache.bcel.generic.GETSTATIC;
 import org.directwebremoting.util.Logger;
+import org.springframework.stereotype.Repository;
 
 import com.icrany.dao.LinkDao;
 import com.icrany.dao.TagDao;
 import com.icrany.pojo.Link;
-import com.icrany.pojo.Tag;
 import com.icrany.util.DbUtil;
 
+@Repository
 public class LinkDaoImp implements LinkDao {
 	
 	private static final Logger logger = Logger.getLogger(TagDao.class);
