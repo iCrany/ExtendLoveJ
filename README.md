@@ -6,9 +6,8 @@
 
 数据库 mysql 5.1
 
-后台框架 SpringMVC 3.0（注入功能等系统完成后再修改）
+后台框架 SpringMVC 3.0
 
 暂时只是在 chrome 浏览器上进行开发 
 
 欢迎大家交流学习 联系地址：http://www.icrany.com
-
