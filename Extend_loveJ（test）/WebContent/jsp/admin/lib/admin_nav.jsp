@@ -6,5 +6,5 @@
   <li><a href="<%=request.getContextPath()%>/jsp/admin/content/article_control">基本管理</a></li>
   <li><a href="<%=request.getContextPath()%>/jsp/admin/user/user_updatebase">用户管理</a></li>
   <li><a href="<%=request.getContextPath()%>/jsp/admin/site/config_control">系统管理</a></li>  
-  <li><a href="<%=request.getContextPath()%>/jsp/login.jsp">退出系统</a></li>
+  <li><a href="<%=request.getContextPath()%>/jsp/login">退出系统</a></li>
 </ul> 

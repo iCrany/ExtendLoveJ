@@ -6,9 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>登录</title>
 
-<%-- <link href="${pageContext.request.contextPath}/styles/common/mycss.css" rel="stylesheet"> --%>
-<%-- <link href="${pageContext.request.contextPath}/styles/common/bootstrap.css" rel="stylesheet"> --%>
-<%-- <link href="${pageContext.request.contextPath}/styles/common/bootstrap-theme.css" rel="stylesheet"> --%>
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap-theme.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/mycss.css" rel="stylesheet">
@@ -18,20 +15,29 @@
 
 <script type="text/javascript">
 	function randomNumAjax(){
+		
 		var randomNum = document.getElementById("randomNum").value;
+		var inputResult = document.getElementById("inputResult").value;
 		if(randomNum == null || randomNum == "") return 0;
+		
 		$.ajax({
 			   type: "POST",
-			   url: "randomNumAjax",
+			   url: "<%=request.getContextPath()%>/randomNumAjax",
 			   data: "randomNum="+randomNum,
 			   success: function(msg){
 				   if(msg == "true"){
 					   document.getElementById("randomNumIsWrong").color = "green";
+					   inputResult = "1";
+					   document.getElementById("inputResult").setAttribute("value", inputResult);
 					   document.getElementById("randomNumIsWrong").innerHTML="验证码正确";
+					   
 				   }
 				   else{
 					   document.getElementById("randomNumIsWrong").color = "red";
+					   inputResult = "-1";
+					   document.getElementById("inputResult").setAttribute("value", inputResult);
 					   document.getElementById("randomNumIsWrong").innerHTML="验证码出错";
+					   
 				   } 
 			   },
 			  error: function(msg){
@@ -39,14 +45,21 @@
 			  }
 			});
 	}
+	
+	
 	function adminLogin(){
+		
 		var username = document.getElementById("username").value;
 		var password = document.getElementById("password").value;
-		if(username==null || password==null){
-			alter("用户名或密码为空,请输入");
+		var inputResult = document.getElementById("inputResult").value;
+		
+		if(username==null || username == "" || password == "" || password==null){
+			alert("用户名或密码为空,请输入!");
 		}
-		else{
-			document.forms.loginForm.action = "login";//一个servlet 用户检验用户的正确性
+		else if(inputResult != 1){
+			alert("验证码错误，请重新输入!");
+		}else{
+			document.forms.loginForm.action = "<%=request.getContextPath()%>/jsp/login";
 			document.forms.loginForm.submit();
 		}
 	}
@@ -62,7 +75,7 @@
 	<div class="container">
 		<center>
 			<p>${userNameOrPasswordNotExits}</p>
-			<form action="/jsp/admin/content/article_control.jsp" name="loginForm" method="post" class="form-login form-horizontal" role="form">
+			<form action="" name="loginForm" method="post" class="form-login form-horizontal" role="form">
 				<h3 class="form-signin-heading">用户登录</h3>
 				<div class="form-group">
 					<label for="username" class="col-md-2 col-md-offset-3 control-label">帐号：</label>
@@ -85,14 +98,16 @@
 						<img src="${pageContext.request.contextPath}/randomNum" class="img-rounded" height="30" ></img>
 					</div>
 					<div class="col-sm-2">
-						<span><font id="randomNumIsWrong" value=""></font></span>
+<!-- 						-1: wrong , 0: not input , 1: true 默认为 0-->
+						<input type="hidden" id="inputResult" value="0">
+						<span><font id="randomNumIsWrong"></font></span>
 					</div>
 				</div>
 			  <div class="form-group">
 			    <div class="col-sm-offset-1 col-sm-8">
 			      <div class="checkbox">
 			        <label>
-			          <input type="checkbox">记住我
+			          <input type="checkbox" name="isRemember" value="true">记住我
 			        </label>
 			      </div>
 			    </div>

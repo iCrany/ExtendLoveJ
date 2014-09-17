@@ -10,7 +10,7 @@ import java.sql.Statement;
 import org.apache.log4j.Logger;
 
 /**
- * 采用单例模式获取一个 Connection 实例
+ * 获取一个 Connection 实例
  * @author iCrany
  *
  */
@@ -36,9 +36,12 @@ public class DbUtil {
 		
 		//TODO 记得修改密码！！！
 		String url ="jdbc:mysql://localhost:3306/extendlovej?"+"user=root&password=root&useUnicode=true&characterEncoding=UTF-8";
+		String urlForEatj = "jdbc:mysql://localhost:3307/icrany?autoReconnect=true";//测试免费的jsp空间
 		try {
-			conn = DriverManager.getConnection(url);
-			return conn;
+//			if(conn == null)
+				return conn = DriverManager.getConnection(url);
+//			else
+//				return conn;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error("连接数据库出错");
