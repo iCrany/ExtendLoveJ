@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Extend_loveJ">
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/properties"/>
-        <property name="java-output-path" value="/Extend_loveJ/build/classes"/>
-        <property name="context-root" value="Extend_loveJ_"/>
-    </wb-module>
-</project-modules>
