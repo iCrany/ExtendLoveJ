@@ -253,7 +253,6 @@ public class UserDaoImp implements UserDao {
 				return entity;
 			}
 			
-			
 		} catch (SQLException e) {
 			logger.error("查找某个用户出错 "+e.getMessage());
 			e.printStackTrace();
