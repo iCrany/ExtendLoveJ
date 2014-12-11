@@ -1,5 +1,10 @@
-package com.icrany.pojo;
+package com.icrany.vo;
 
+import org.kidding.orm.entity.POJO;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,29 +12,30 @@ import java.util.Date;
  * @author Administrator
  *
  */
-public class Category {
+@Table(name="category")
+public class Category extends POJO implements Serializable {
 
-	public int getArticleId() {
+	public Integer getArticleId() {
 		return articleId;
 	}
 
-	public void setArticleId(int articleId) {
+	public void setArticleId(Integer articleId) {
 		this.articleId = articleId;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getParentId() {
+	public Integer getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(int parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 
@@ -57,19 +63,19 @@ public class Category {
 		this.name = name;
 	}
 
-	public int getPriority() {
+	public Integer getPriority() {
 		return priority;
 	}
 
-	public void setPriority(int priority) {
+	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
 
-	public boolean isTrash() {
+	public Boolean isTrash() {
 		return trash;
 	}
 
-	public void setTrash(boolean trash) {
+	public void setTrash(Boolean trash) {
 		this.trash = trash;
 	}
 
@@ -81,11 +87,12 @@ public class Category {
 		this.type = type;
 	}
 
-	private int id;
+	@Id
+	private Integer id;
 	
-	private int articleId;
+	private Integer articleId;
 	
-	private int parentId;
+	private Integer parentId;
 	
 	private Date createTime;
 	
@@ -93,9 +100,9 @@ public class Category {
 	
 	private String name;
 	
-	private int priority;
+	private Integer priority;
 	
-	private boolean trash;
+	private Boolean trash;
 	
 	private String type;
 	

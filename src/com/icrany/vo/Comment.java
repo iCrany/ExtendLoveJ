@@ -1,13 +1,19 @@
-package com.icrany.pojo;
+package com.icrany.vo;
 
+import org.kidding.orm.entity.POJO;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 文章的评论类
  * @author Administrator
  */
-public class Comment {
-	public boolean isTrash() {
+@Table(name="comment")
+public class Comment extends POJO implements Serializable {
+	public Boolean isTrash() {
 		return trash;
 	}
 
@@ -19,23 +25,23 @@ public class Comment {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getArticleId() {
+	public Integer getArticleId() {
 		return articleId;
 	}
 
-	public void setArticleId(int articleId) {
+	public void setArticleId(Integer articleId) {
 		this.articleId = articleId;
 	}
 
@@ -87,9 +93,10 @@ public class Comment {
 		this.site = site;
 	}
 
-	private int id;
+	@Id
+	private Integer id;
 	
-	private int articleId;
+	private Integer articleId;
 	
 	private String content;
 	
@@ -114,7 +121,7 @@ public class Comment {
 	/**
 	 * 是否为垃圾评论
 	 */
-	private boolean trash;
+	private Boolean trash;
 	
 	
 }

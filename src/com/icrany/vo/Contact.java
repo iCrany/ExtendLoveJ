@@ -1,16 +1,23 @@
-package com.icrany.pojo;
+package com.icrany.vo;
+
+import org.kidding.orm.entity.POJO;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 
  * @author Administrator
  *
  */
-public class Contact {
-	public int getId() {
+@Table(name="contact")
+public class Contact extends POJO implements Serializable {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -70,15 +77,16 @@ public class Contact {
 		this.status = status;
 	}
 
-	public boolean isTrash() {
+	public Boolean isTrash() {
 		return trash;
 	}
 
-	public void setTrash(boolean trash) {
+	public void setTrash(Boolean trash) {
 		this.trash = trash;
 	}
 
-	private int id;
+	@Id
+	private Integer id;
 	/**
 	 * not null
 	 */
@@ -102,7 +110,7 @@ public class Contact {
 	
 	private String status;
 	
-	private boolean trash;
+	private Boolean trash;
 	
 	
 }

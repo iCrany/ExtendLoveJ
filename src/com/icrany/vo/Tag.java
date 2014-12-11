@@ -1,11 +1,18 @@
-package com.icrany.pojo;
+package com.icrany.vo;
 
-public class Tag {
-	public int getId() {
+import org.kidding.orm.entity.POJO;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Table(name="tag")
+public class Tag extends POJO implements Serializable {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -25,7 +32,7 @@ public class Tag {
 		this.description = description;
 	}
 
-	public boolean isTrash() {
+	public Boolean isTrash() {
 		return trash;
 	}
 
@@ -33,11 +40,12 @@ public class Tag {
 		this.trash = trash;
 	}
 
-	private int id;
+	@Id
+	private Integer id;
 	
 	private String name;
 	
 	private String description;
 	
-	private boolean trash;
+	private Boolean trash;
 }

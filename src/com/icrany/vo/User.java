@@ -1,5 +1,10 @@
-package com.icrany.pojo;
+package com.icrany.vo;
 
+import org.kidding.orm.entity.POJO;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,21 +12,21 @@ import java.util.Date;
  * @author Administrator
  *
  */
-
-public class User {
-	public int getId() {
+@Table(name="user")
+public class User extends POJO implements Serializable {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
@@ -41,11 +46,11 @@ public class User {
 		this.email = email;
 	}
 
-	public boolean isGender() {
+	public Boolean isGender() {
 		return gender;
 	}
 
-	public void setGender(boolean gender) {
+	public void setGender(Boolean gender) {
 		this.gender = gender;
 	}
 
@@ -97,20 +102,21 @@ public class User {
 		this.description = description;
 	}
 
-	public int getRoleType() {
+	public Integer getRoleType() {
 		return roleType;
 	}
 
-	public void setRoleType(int roleType) {
+	public void setRoleType(Integer roleType) {
 		this.roleType = roleType;
 	}
 
-	private int id;
+	@Id
+	private Integer id;
 	
 	/**
 	 * not null
 	 */
-	private int age;
+	private Integer age;
 
 	/**
 	 * not null
@@ -125,7 +131,7 @@ public class User {
 	/**
 	 * not null
 	 */
-	private boolean gender;
+	private Boolean gender;
 	
 	/**
 	 * not null
@@ -151,6 +157,6 @@ public class User {
 	/**
 	 * not null
 	 */
-	private int roleType;
+	private Integer roleType;
 
 }
