@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Table(name="comment")
 public class Comment extends POJO implements Serializable {
-	public Boolean isTrash() {
+	public Boolean getTrash() {
 		return trash;
 	}
 
@@ -21,7 +21,7 @@ public class Comment extends POJO implements Serializable {
 		this.trash = trash;
 	}
 
-	public Boolean isStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 

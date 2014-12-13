@@ -15,14 +15,6 @@ import java.util.Date;
 @Table(name="category")
 public class Category extends POJO implements Serializable {
 
-	public Integer getArticleId() {
-		return articleId;
-	}
-
-	public void setArticleId(Integer articleId) {
-		this.articleId = articleId;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -71,7 +63,7 @@ public class Category extends POJO implements Serializable {
 		this.priority = priority;
 	}
 
-	public Boolean isTrash() {
+	public Boolean getTrash() {
 		return trash;
 	}
 
@@ -89,8 +81,6 @@ public class Category extends POJO implements Serializable {
 
 	@Id
 	private Integer id;
-	
-	private Integer articleId;
 	
 	private Integer parentId;
 	

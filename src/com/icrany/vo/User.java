@@ -46,7 +46,7 @@ public class User extends POJO implements Serializable {
 		this.email = email;
 	}
 
-	public Boolean isGender() {
+	public Boolean getGender() {
 		return gender;
 	}
 

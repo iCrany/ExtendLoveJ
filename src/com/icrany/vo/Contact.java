@@ -77,7 +77,7 @@ public class Contact extends POJO implements Serializable {
 		this.status = status;
 	}
 
-	public Boolean isTrash() {
+	public Boolean getTrash() {
 		return trash;
 	}
 

@@ -62,7 +62,7 @@ public class Link extends POJO implements Serializable {
 		this.status = status;
 	}
 
-	public Boolean isTrash() {
+	public Boolean getTrash() {
 		return trash;
 	}
 

@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.icrany.pojo.Tag;
+import com.icrany.vo.Tag;
 import com.icrany.service.TagService;
-import com.icrany.service.imp.TagServiceImp;
 
 @Controller
 @RequestMapping("/jsp/admin/content")
@@ -48,7 +47,7 @@ public class TagController {
 	public String createMethodPost(Map<String,Object> map,Tag tag){
 		
 		createDataPrepare(map,tag);
-		if(tagService.insert(tag)) System.out.println("标签添加成功了");
+		if(tagService.insert(tag) >= 0) System.out.println("标签添加成功了");
 		else System.out.println("标签添加失败了");
 		return "redirect:"+CONTROL_TAG;
 	}
@@ -68,7 +67,7 @@ public class TagController {
 	public String updateMethodPost(Map<String,Object> map,Tag tag){
 		logger.info("updateMethodPost()");
 		
-		if(tagService.update(tag)) System.out.println("标签更新成功了");
+		if(tagService.update(tag) >= 0) System.out.println("标签更新成功了");
 		else System.out.println("标签更新失败了");
 		
 		return "redirect:"+CONTROL_TAG;
@@ -77,7 +76,7 @@ public class TagController {
 	@RequestMapping(value="/tag_delete")
 	public String delete(Map<String,Object> map,Tag tag){
 		
-		if(tagService.delete(tag)) System.out.println("标签删除成功了");
+		if(tagService.delete(tag) >= 0) System.out.println("标签删除成功了");
 		else System.out.println("标签删除失败了");
 		
 		return "redirect:"+CONTROL_TAG;

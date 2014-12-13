@@ -15,6 +15,18 @@ public class Constants {
 	
 	/**cookies 的最大活跃周期，默认是为 一周 */
 	public static final int COOKIE_IS_REMEMBER_MAX_ACTIVE_TIME = 7 * 24 * 60 * 60;
+
+
+	//数据库中得一些常量设置
+	/**
+	 * 数据库别名
+	 */
+	public static final String DB_ALIAS = "mysql";
+
+	/**
+	 * 数据库池的配置名称
+	 */
+	public static final String DB_CONFIG_NAME  = "druid.properties";
 	
 	
 }

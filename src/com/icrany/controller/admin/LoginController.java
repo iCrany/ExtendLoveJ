@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.icrany.pojo.User;
+import com.icrany.vo.User;
 import com.icrany.system.Constants;
 
 /**
@@ -33,9 +33,6 @@ public class LoginController {
 	public static final String LOGOUT = "/jsp/login";
 	
 	/**
-	 * @param request
-	 * @param response
-	 * @param isRemember
 	 * @return
 	 */
 	@RequestMapping(value = "/login",method = RequestMethod.GET)

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.icrany.service.CategoryService;
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.icrany.pojo.Category;
-import com.icrany.service.CategoryService;
-import com.icrany.service.imp.CategoryServiceImp;
+import com.icrany.vo.Category;
 
 /**
  * 暂且只支持没有父类的分类结构，以后完善
@@ -90,16 +89,15 @@ public class CategoryController {
 	 */
 	@RequestMapping(value="/category_create",method=RequestMethod.POST)
 	public String createMethodPost(Map<String,Object> map,Category category){
-		logger.info("createMethodPost()");
-		
 		System.out.println(" category name = "+category.getName());
 		System.out.println(" category description = "+ category.getDescription());
 		
 		createDataPrepare(category);
-		if(categoryService.save(category)){
+		if(categoryService.save(category) >= 0){
 			System.out.println(" category 添加成功了");
+		}else{
+			System.out.println("category 添加失败了");
 		}
-		else System.out.println("category 添加失败了");
 		
 		return "redirect:"+CONTROL_CATEGORY;
 	}
@@ -110,8 +108,8 @@ public class CategoryController {
 	 */
 	public void createDataPrepare(Category category){
 		Date createTime = new Date();
-		int priority = 0;
-		boolean trash = false;
+		Integer priority = 0;
+		Boolean trash = false;
 		String type = null;
 		
 		category.setCreateTime(createTime);
@@ -147,7 +145,7 @@ public class CategoryController {
 	@RequestMapping(value="/category_update",method=RequestMethod.POST)
 	public String updateMethodPost(Map<String,Object> map, Category category){
 		
-		if(categoryService.update(category)) System.out.println("更新分类成功了");
+		if(categoryService.update(category) >= 0) System.out.println("更新分类成功了");
 		else System.out.println("更新分类失败了------");
 		
 		return "redirect:" + CONTROL_CATEGORY;
@@ -156,7 +154,7 @@ public class CategoryController {
 	@RequestMapping(value="/category_delete")
 	public String delete(Map<String,Object> map,Category category){
 		
-		if(categoryService.delete(category)) System.out.println("分类删除成功了");
+		if(categoryService.delete(category) >= 0) System.out.println("分类删除成功了");
 		else System.out.println("分类删除失败了");
 		
 		return "redirect:" + CONTROL_CATEGORY;

@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.icrany.pojo.Link;
+import com.icrany.vo.Link;
 import com.icrany.service.LinkService;
-import com.icrany.service.imp.LinkServiceImp;
 
 @Controller
 @RequestMapping("/jsp/admin/content")
@@ -78,7 +77,7 @@ public class LinkController {
 		System.out.println("description = "+link.getDescription());
 		System.out.println("site = "+link.getSite());
 		createDataPrepare(map,link);
-		if(linkService.insert(link)) System.out.println("链接添加成功了");
+		if(linkService.insert(link) >= 0) System.out.println("链接添加成功了");
 		else System.out.println("链接添加失败了");
 		
 		return "redirect:"+CONTROL_LINK;
@@ -99,7 +98,7 @@ public class LinkController {
 		System.out.println("link description = "+link.getDescription());
 		System.out.println("link name = "+link.getName());
 		
-		if(linkService.update(link)) System.out.println("链接更新成功");
+		if(linkService.update(link) >= 0) System.out.println("链接更新成功");
 		else System.out.println("链接更新失败----");
 		
 		return "redirect:"+CONTROL_LINK;
@@ -108,7 +107,7 @@ public class LinkController {
 	@RequestMapping(value="/link_delete")
 	public String delete(Map<String,Object> map,Link link){
 		
-		if(linkService.delete(link)) System.out.println("链接删除成功");
+		if(linkService.delete(link) >= 0) System.out.println("链接删除成功");
 		else System.out.println("链接删除失败了");
 		
 		return  "redirect:"+CONTROL_LINK;

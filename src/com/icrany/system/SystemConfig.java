@@ -3,7 +3,7 @@ package com.icrany.system;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.icrany.pojo.SiteConfig;
+import com.icrany.vo.SiteConfig;
 /**
  * 系统配置类
  * @author Administrator

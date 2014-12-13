@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.icrany.service.*;
+import com.icrany.view.ArticleView;
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -12,24 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.icrany.pojo.Article;
-import com.icrany.pojo.User;
-import com.icrany.service.ArticleService;
-import com.icrany.service.CategoryService;
-import com.icrany.service.CommentService;
-import com.icrany.service.LinkService;
-import com.icrany.service.SiteConfigService;
-import com.icrany.service.TagService;
-import com.icrany.service.UserService;
-import com.icrany.service.imp.ArticleServiceImp;
-import com.icrany.service.imp.CategoryServiceImp;
-import com.icrany.service.imp.CommentServiceImp;
-import com.icrany.service.imp.LinkServiceImp;
-import com.icrany.service.imp.SiteConfigServiceImp;
-import com.icrany.service.imp.TagServiceImp;
-import com.icrany.service.imp.UserServiceImp;
+import com.icrany.vo.Article;
+import com.icrany.vo.User;
+
 
 @Controller
 @RequestMapping(value="/jsp/blog")
@@ -75,7 +63,7 @@ public class ArticleViewController {
 	}
 	
 	@RequestMapping(value="/blog_view")
-	public String blogView(Map<String,Object> map, Article article){
+	public String blogView(Map<String,Object> map, ArticleView article){
 		
 		article = articleService.queryById(article.getId());
 		//点击一次就自增一个文章的浏览数
@@ -91,7 +79,7 @@ public class ArticleViewController {
 	/**
 	 * 保存相关主页面的信息
 	 * @param map
-	 * @param user
+	 * @param articleId
 	 */
 	private void createReferenceData(Map<String,Object> map , int articleId){
 		User user = new User();//虚设的一个实例，没有任何的用处

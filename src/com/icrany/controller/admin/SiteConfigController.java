@@ -8,10 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.icrany.pojo.Music;
-import com.icrany.pojo.SiteConfig;
+import com.icrany.view.Music;
+import com.icrany.vo.SiteConfig;
 import com.icrany.service.SiteConfigService;
-import com.icrany.service.imp.SiteConfigServiceImp;
 
 @Controller
 @RequestMapping(value="/jsp/admin/site")
@@ -23,29 +22,37 @@ public class SiteConfigController {
 	private SiteConfigService siteConfigService ;
 	
 	private static final String CONTROL_CONFIG = "config_control";
+
+	private static final String UPDATE_CONFIG = "config_update";
 	
 	private static final String CONTROL_MUSIC = "music_control";
 	
 	@RequestMapping(value="/config_control",method=RequestMethod.GET)
 	public String configControlMethodGet(Map<String,Object> map,SiteConfig siteConfig){
-		
+		siteConfig = siteConfigService.find(siteConfig);
+		map.put("siteConfig", siteConfig);
+		return CONTROL_CONFIG;
+	}
+	
+	@RequestMapping(value="/config_update",method=RequestMethod.GET)
+	public String updateMethodGet(Map<String,Object> map,SiteConfig siteConfig){
+		logger.info("updateMethodGet()");
 		siteConfig = siteConfigService.find(siteConfig);
 		map.put("siteConfig", siteConfig);
 		return CONTROL_CONFIG;
 	}
 	
 	@RequestMapping(value="/config_update",method=RequestMethod.POST)
-	public String update(Map<String,Object> map,SiteConfig siteConfig){
-		siteConfigService.update(siteConfig);//先更新
-		siteConfig = siteConfigService.find(siteConfig);//在查找
-		map.put("siteConfig", siteConfig);
-		return CONTROL_CONFIG;
-	}
-	
-	@RequestMapping(value="/config_update",method=RequestMethod.POST)
-	public String configControlMethodPost(Map<String,Object> map,SiteConfig siteConfig){
-		siteConfigService.update(siteConfig);//先更新
-		siteConfig = siteConfigService.find(siteConfig);//在查找
+	public String updateMethodPost(Map<String,Object> map,SiteConfig siteConfig){
+		logger.info("updateMethodPost()");
+
+		SiteConfig entity = new SiteConfig();
+		entity.setId(siteConfig.getId());
+		entity = siteConfigService.find(entity);//先查找，有就更新，没有就插入
+		if(null == entity)
+			siteConfigService.insert(siteConfig);//插入
+		else
+			siteConfigService.update(siteConfig);//更新
 		map.put("siteConfig", siteConfig);
 		return CONTROL_CONFIG;
 	}

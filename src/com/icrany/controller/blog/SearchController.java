@@ -9,6 +9,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.icrany.service.*;
+import com.icrany.util.WapperUtil;
+import com.icrany.view.ArticleView;
+import com.icrany.vo.CategoryArticle;
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -19,27 +23,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.icrany.pojo.Article;
-import com.icrany.pojo.Pager;
-import com.icrany.pojo.User;
-import com.icrany.service.ArticleService;
-import com.icrany.service.CategoryArticleService;
-import com.icrany.service.CategoryService;
-import com.icrany.service.CommentService;
-import com.icrany.service.LinkService;
-import com.icrany.service.SiteConfigService;
-import com.icrany.service.TagArticleService;
-import com.icrany.service.TagService;
-import com.icrany.service.UserService;
-import com.icrany.service.imp.ArticleServiceImp;
-import com.icrany.service.imp.CategoryArticleServiceImp;
-import com.icrany.service.imp.CategoryServiceImp;
-import com.icrany.service.imp.CommentServiceImp;
-import com.icrany.service.imp.LinkServiceImp;
-import com.icrany.service.imp.SiteConfigServiceImp;
-import com.icrany.service.imp.TagArticleServiceImp;
-import com.icrany.service.imp.TagServiceImp;
-import com.icrany.service.imp.UserServiceImp;
+import com.icrany.vo.Article;
+import com.icrany.util.Pager;
+import com.icrany.vo.User;
+
 
 @Controller
 @RequestMapping(value="/jsp/blog")
@@ -94,7 +81,7 @@ public class SearchController {
 	@RequestMapping(value="/blog_search")
 	public String serarch(Map<String,Object> map, HttpServletRequest request,HttpServletResponse response,Integer currentPage){
 		//TODO:因为查找的话都应该是文章的一些内容，所以只要查找相应的文章即可,目前暂时只支持单个关键字的搜索，或者说是单个参数的搜索，以后改进
-		List<Article> articleList = null;
+		List<ArticleView> articleList = null;
 		
 		if(request.getParameter("articleId") != null){
 			//TODO:貌似这个用途不大
@@ -124,7 +111,7 @@ public class SearchController {
 		if(currentPage == null) currentPage = 1;
 		String url = request.getContextPath() + "/jsp/blog/blog_search/page/";
 		pager.setUrl(url);
-		pager.doWithArticles(articleList, currentPage, request);
+		pager.doWithArticlesView(articleList, currentPage, request);
 		map.put("articles",articleList);
 		map.put("pager",pager);
 		
@@ -163,14 +150,15 @@ public class SearchController {
 	 * @param id
 	 * @return
 	 */
-	public List<Article> searchByCategoryId(int id){
-		List<Article> articleList = new ArrayList<Article>();
+	public List<ArticleView> searchByCategoryId(int id){
+		List<ArticleView> articleList = new ArrayList<ArticleView>();
 		//处理多对多的查询
-		List<Integer> articleIdList = categoryArticleService.queryByCategoryId(id);
+		List<CategoryArticle> articleIdList = categoryArticleService.queryByCategoryId(id);
 		
 		for(int i = 0 ;i< articleIdList.size(); i++){
-			Article article = articleService.queryById(articleIdList.get(i));
-			articleList.add(article);
+			Article article = articleService.queryById(articleIdList.get(i).getArticleId());
+			ArticleView articleView = WapperUtil.wapperArticle2View(article);
+			articleList.add(articleView);
 		}
 		
 		return articleList;
@@ -181,14 +169,15 @@ public class SearchController {
 	 * @param id
 	 * @return
 	 */
-	public List<Article> searchByTagId(int id){
-		List<Article> articleList = new ArrayList<Article>();
+	public List<ArticleView> searchByTagId(int id){
+		List<ArticleView> articleList = new ArrayList<ArticleView>();
 		
 		List<Integer> articleIdList = tagArticleService.queryByTagId(id);
 		
 		for(int i = 0 ;i< articleIdList.size(); i++){
 			Article article = articleService.queryById(articleIdList.get(i));
-			articleList.add(article);
+			ArticleView articleView = WapperUtil.wapperArticle2View(article);
+			articleList.add(articleView);
 		}		
 		return articleList;
 	}
@@ -198,8 +187,8 @@ public class SearchController {
 	 * @param key
 	 * @return
 	 */
-	public List<Article> searchByFuzzyName(String key){
-		List<Article> articleList = new ArrayList<Article>();
+	public List<ArticleView> searchByFuzzyName(String key){
+		List<ArticleView> articleList;
 		
 		//TODO:这里需要预处理一些这个 key
 		articleList = articleService.findByFuzzyName(key);
@@ -210,7 +199,6 @@ public class SearchController {
 	/**
 	 * 保存相关主页面的信息
 	 * @param map
-	 * @param user
 	 */
 	private void createReferenceData(Map<String,Object> map){
 		User user = new User();//虚设的一个实例，没有任何的用处

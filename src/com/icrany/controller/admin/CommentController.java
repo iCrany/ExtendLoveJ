@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.icrany.pojo.Comment;
-import com.icrany.pojo.Tag;
+import com.icrany.vo.Comment;
+import com.icrany.vo.Tag;
 import com.icrany.service.CommentService;
-import com.icrany.service.imp.CommentServiceImp;
 
 @Controller
 @RequestMapping("/jsp/admin/content")
@@ -64,7 +63,7 @@ public class CommentController {
 	public String createMethodPost(Map<String,Object> map,Comment comment){
 		
 		createDataPrepare(map,comment);
-		if(commentService.insert(comment)) System.out.println("标签添加成功了");
+		if(commentService.insert(comment) >= 0) System.out.println("标签添加成功了");
 		else System.out.println("评论添加失败了");
 		return "redirect:"+CONTROL_COMMENT;
 	}
@@ -86,7 +85,7 @@ public class CommentController {
 		
 		System.out.println("approveMethodPost() name = "+name);
 		System.out.println(" comment id = "+comment.getId());
-		System.out.println(" comment trash = "+comment.isTrash());
+		System.out.println(" comment trash = "+comment.getTrash());
 		System.out.println(" comment name = "+comment.getName());
 		
 		if(commentService.updateAttribute(name,comment)) System.out.println("标签更新某个属性成功了");
@@ -98,7 +97,7 @@ public class CommentController {
 	@RequestMapping(value="/comment_delete")
 	public String delete(Map<String,Object> map,Comment comment,@RequestParam(value="id") Integer id){
 		
-		if(commentService.delete(comment)) System.out.println("评论删除成功了");
+		if(commentService.delete(comment) >= 0) System.out.println("评论删除成功了");
 		else System.out.println("评论删除失败了");
 		
 		return "redirect:"+CONTROL_COMMENT;

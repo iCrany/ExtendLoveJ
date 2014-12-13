@@ -7,9 +7,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.icrany.service.*;
+import com.icrany.view.ArticleView;
 import org.apache.log4j.Logger;
+import org.kidding.orm.util.PrintUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,19 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.icrany.pojo.Article;
-import com.icrany.pojo.Category;
-import com.icrany.pojo.Tag;
-import com.icrany.service.ArticleService;
-import com.icrany.service.CategoryArticleService;
-import com.icrany.service.CategoryService;
-import com.icrany.service.TagArticleService;
-import com.icrany.service.TagService;
-import com.icrany.service.imp.ArticleServiceImp;
-import com.icrany.service.imp.CategoryArticleServiceImp;
-import com.icrany.service.imp.CategoryServiceImp;
-import com.icrany.service.imp.TagArticleServiceImp;
-import com.icrany.service.imp.TagServiceImp;
+import com.icrany.vo.Article;
+import com.icrany.vo.Category;
+import com.icrany.vo.Tag;
 
 @Controller
 @RequestMapping("/jsp/admin/content")
@@ -38,11 +30,11 @@ public class ArticleController {
 	
 	private static final Logger logger = Logger.getLogger(ArticleController.class);
 	
-	private static String CREATE_ARTICLE = "article_create";
+	private static String CREATE_ARTICLE = "article_create";//创建文章
 	
-	private static String UPDATE_ARTICLE = "article_update";
+	private static String UPDATE_ARTICLE = "article_update";//更新文章
 	
-	private static String CONTROL_ARTICLE = "article_control";
+	private static String CONTROL_ARTICLE = "article_control";//编辑文章
 
 	@Autowired
 //	@Qualifier("articleServiceImp")//这个可以进一步缩小对应的bean的类型
@@ -58,11 +50,9 @@ public class ArticleController {
 	private CategoryArticleService categoryArticleService ;
 	
 	@Autowired
-	private TagArticleService tagArticleService ;	
+	private TagArticleService tagArticleService ;
 	
 	ArticleController(){
-//		这里有成功的初始化
-		System.out.println("ArticleController 初始化成功");
 	}
 	
 	/**
@@ -79,7 +69,6 @@ public class ArticleController {
 	    binder.registerCustomEditor(Date.class, editor);
 	}
 	
-	
 	/**
 	 * 这里相应的解决直接在浏览器中输入 url 的 get 请求的处理
 	 * @param request
@@ -89,7 +78,6 @@ public class ArticleController {
 	 */
 	@RequestMapping(value="/article_create",method=RequestMethod.GET)
 	public String createMethodGet(HttpServletRequest request, Map<String, Object> map, Article article){
-		logger.info("createMethodGet()");
 		createReferenceData(article,map);
 		return CREATE_ARTICLE;
 	}
@@ -104,13 +92,14 @@ public class ArticleController {
 	 */
 	@RequestMapping(value="/article_create",method=RequestMethod.POST)
 	public String createMethodPost(HttpServletRequest request,Article article,Map<String,Object> map){
-		logger.info("createMethodPost()");
-		
 		//获取 Category 和 tag 的选择结果
 		String[] categorys = request.getParameterValues("categorys");
 		String[] tags = request.getParameterValues("tags");
 		createDataPrepare(article,map);
-		int articleId = articleService.insert(article);
+
+		PrintUtil<Article> printUtil = new PrintUtil<Article>(Article.class);
+		printUtil.printKeyValue(article,true);
+		Integer articleId = articleService.insert(article);
 		
 		categoryArticleService.insertArray(categorys, articleId);
 		tagArticleService.insertArray(tags, articleId);
@@ -156,9 +145,8 @@ public class ArticleController {
 	
 	@RequestMapping(value="/article_control")
 	public String control(Map<String,Object> map){
-		logger.info("control()");
 		if(articleService== null) logger.info("articleService 是空的");
-		List<Article> articles = articleService.getAllArticle();
+		List<ArticleView> articles = articleService.getAllArticle();
 		map.put("articles", articles);//springMvc 自动会将这个放入模型中
 		return CONTROL_ARTICLE;
 	}
@@ -173,8 +161,6 @@ public class ArticleController {
 	 */
 	@RequestMapping(value="article_update", method=RequestMethod.GET)
 	public String updateMethodGet(@RequestParam(value="id",required=false) Integer id, Map<String,Object> map){
-		logger.info("updateArticleMethodGet()");
-		System.out.println(" id = "+id); 
 		if(id == null){
 			return UPDATE_ARTICLE;
 		}
@@ -185,31 +171,30 @@ public class ArticleController {
 	
 	@RequestMapping(value="article_update",method=RequestMethod.POST)
 	public String updateMethodPost(@RequestParam(value="id",required=true) Integer id,Article article,Map<String,Object> map){
-		logger.info("updateArticleMethodPost()");
-		
-		System.out.println(" id = "+id);
-		System.out.println(" article id = " + article.getId());
-		Date modifyTime = new Date();
-		
-		//TODO:这个文章的摘要算法还要解决文章中保存了 html 源码的时候怎么把 html 标签一起显示出来的问题
-		String summary = article.getContent().length() > 6 ? article.getContent().substring(0,6) : article.getContent();
-		article.setModifyTime(modifyTime);
-		article.setSummary(summary);
-		if(articleService.update(article)) logger.info("文章更新成功了");
-		else logger.info("更新文章失败了");
-		
+
+		try{
+			Date modifyTime = new Date();
+
+			//TODO:这个文章的摘要算法还要解决文章中保存了 html 源码的时候怎么把 html 标签一起显示出来的问题
+			String summary = article.getContent().length() > 6 ? article.getContent().substring(0,6) : article.getContent();
+			article.setModifyTime(modifyTime);
+			article.setSummary(summary);
+			articleService.update(article);
+		}catch(Exception e){
+			logger.error("fail to update article!!!",e);
+		}
 		return UPDATE_ARTICLE;
 	}
 	
 	@RequestMapping(value="article_delete")
 	public String delete(@RequestParam(value="id") Integer id, Map<String,Object> map){
-		logger.info("delete()");
-		
-		logger.info(" id = "+id);
-		Article article = new Article();
-		article.setId(id);
-		articleService.delete(article);
-		logger.info("删除文章成功了！！！！！");
+		try {
+			Article article = new Article();
+			article.setId(id);
+			articleService.delete(article);
+		}catch(Exception e){
+			logger.error("fail to delete article!!!",e);
+		}
 		return "redirect:" + CONTROL_ARTICLE;
 	}
 }

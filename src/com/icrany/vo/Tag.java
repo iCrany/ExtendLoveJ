@@ -32,7 +32,7 @@ public class Tag extends POJO implements Serializable {
 		this.description = description;
 	}
 
-	public Boolean isTrash() {
+	public Boolean getTrash() {
 		return trash;
 	}
 

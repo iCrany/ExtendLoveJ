@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.icrany.pojo.User;
+import com.icrany.vo.User;
 import com.icrany.service.UserService;
-import com.icrany.service.imp.UserServiceImp;
 
 @Controller
 @RequestMapping(value="/jsp/admin/user")
@@ -54,8 +53,8 @@ public class UserController {
 	
 	@RequestMapping(value="/user_updatebase",method=RequestMethod.POST)
 	public String updateBaseMethodPost(Map<String,Object> map,User user){
-		boolean statusCode = userService.updateBase(user);
-		if(statusCode) map.put("message", "更新用户信息成功");
+		Integer isOk = userService.updateBase(user);
+		if(isOk >= 0) map.put("message", "更新用户信息成功");
 		else map.put("message", "更新用户信息失败");
 		map.put("user", user);
 		return USER_UPDATEBASE;
@@ -71,8 +70,8 @@ public class UserController {
 	@RequestMapping(value="/user_updatepassword",method=RequestMethod.POST)
 	public String updatePasswordMethodPost(Map<String,Object> map,User user){
 		System.out.println(" user password = "+user.getPassword());
-		boolean statusCode = userService.updatePassword(user);
-		if(statusCode) map.put("message", "更新密码成功");
+		Integer isOk = userService.updatePassword(user);
+		if(isOk >= 0) map.put("message", "更新密码成功");
 		else map.put("message", "更新密码失败");
 		return USER_UPDATEPASSWORD;
 	}

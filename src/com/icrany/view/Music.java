@@ -1,16 +1,19 @@
-package com.icrany.pojo;
+package com.icrany.view;
+
+import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
- * 那个播放器中的音乐的一个 pojo
+ * 那个播放器中的音乐的一个 vo
  * @author Administrator
  *
  */
-public class Music {
-	public int getId() {
+public class Music implements Serializable {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -38,7 +41,7 @@ public class Music {
 		this.singer = singer;
 	}
 
-	private int id;
+	private Integer id;
 	
 	private String name;
 	

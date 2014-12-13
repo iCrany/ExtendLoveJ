@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.icrany.pojo.User;
+import com.icrany.vo.User;
 
 
 public class SecurityFilter implements Filter {

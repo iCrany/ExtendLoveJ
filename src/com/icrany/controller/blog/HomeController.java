@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.icrany.service.*;
+import com.icrany.view.ArticleView;
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,23 +18,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.icrany.pojo.Article;
-import com.icrany.pojo.Pager;
-import com.icrany.pojo.User;
-import com.icrany.service.ArticleService;
-import com.icrany.service.CategoryService;
-import com.icrany.service.CommentService;
-import com.icrany.service.LinkService;
-import com.icrany.service.SiteConfigService;
-import com.icrany.service.TagService;
-import com.icrany.service.UserService;
-import com.icrany.service.imp.ArticleServiceImp;
-import com.icrany.service.imp.CategoryServiceImp;
-import com.icrany.service.imp.CommentServiceImp;
-import com.icrany.service.imp.LinkServiceImp;
-import com.icrany.service.imp.SiteConfigServiceImp;
-import com.icrany.service.imp.TagServiceImp;
-import com.icrany.service.imp.UserServiceImp;
+import com.icrany.vo.Article;
+import com.icrany.util.Pager;
+import com.icrany.vo.User;
+
 
 @Controller
 @RequestMapping(value="/jsp/blog")
@@ -114,10 +103,16 @@ public class HomeController {
 		
 		//分页的处理
 		Pager pager = new Pager();
-		List<Article> articles = articleService.getAllArticle();
+		List<ArticleView> articles = articleService.getAllArticle();
+
+		System.out.println("home controller");
+		for(ArticleView articleView : articles){
+			System.out.println("id = " + articleView.getId() + " title = " + articleView.getTitle());
+		}
+
 		String url = request.getContextPath() + "/jsp/blog/page/";
 		pager.setUrl(url);
-		pager.doWithArticles(articles, currentPage, request);
+		pager.doWithArticlesView(articles, currentPage, request);
 		map.put("articles",articles);
 		map.put("pager",pager);
 		

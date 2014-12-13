@@ -14,15 +14,13 @@ import javax.servlet.http.HttpServlet;
 
 import org.directwebremoting.util.Logger;
 
-import com.icrany.pojo.Article;
-import com.icrany.pojo.SiteConfig;
-import com.icrany.pojo.User;
+import com.icrany.vo.Article;
+import com.icrany.vo.SiteConfig;
+import com.icrany.vo.User;
 import com.icrany.service.ArticleService;
 import com.icrany.service.SiteConfigService;
 import com.icrany.service.UserService;
-import com.icrany.service.imp.ArticleServiceImp;
-import com.icrany.service.imp.SiteConfigServiceImp;
-import com.icrany.service.imp.UserServiceImp;
+import org.kidding.orm.db.DBManager;
 
 /**
  * Servlet implementation class SystemInitServlet
@@ -35,19 +33,20 @@ public class SystemInitServlet extends HttpServlet {
 	
 	@Override
 	public void init(){
+
 		Properties pro = new Properties();
 		InputStream inStream = null;
-		
+
+		initLog4J();
 		inStream = this.getClass().getResourceAsStream("/ExtendLoveJ.properties");
 		
 		try {
 			pro.load(inStream);
-			Set keySet = pro.keySet();
+			Set<Object> keySet = pro.keySet();
 			//这里是获取这个配置文件中的 key 这里是默认存在一个使用的用户
 			for(Iterator it = keySet.iterator();it.hasNext();){
 				String key = (String)it.next();
 				String value = pro.getProperty(key);
-				System.out.println(key+" = "+value);
 				SystemConfig.getSystemConfig().put(key, value);
 			}
 			
@@ -56,14 +55,12 @@ public class SystemInitServlet extends HttpServlet {
 				initDataBase();
 				initPageTemplate();
 			} catch (ParseException e) {
-				logger.error("初始数据库的日期转换出错了 "+e.getStackTrace());
-				e.printStackTrace();
+				logger.error("初始数据库的日期转换出错了 ",e);
 			}
-			
+
 			logger.info("================================系统配置成功！！！！========================");
 		} catch (IOException e) {
-			logger.error("系统初始化出错 "+e.getStackTrace());
-			e.printStackTrace();
+			logger.error("系统初始化出错 ",e);
 		}
 	}
     /**
@@ -78,7 +75,7 @@ public class SystemInitServlet extends HttpServlet {
      * 这里用来初始化不同的独立页面模版 这里暂时只支持 关于我  留言板  文章归档 三种不同的独立页面 AboutMe ReaderWalls SiteMap 
      */
     public void initPageTemplate(){
-    	ArticleService articleService = new ArticleServiceImp();
+    	ArticleService articleService = new ArticleService();
     	
     	List<Article> articleList = articleService.findPage();
     	
@@ -120,15 +117,30 @@ public class SystemInitServlet extends HttpServlet {
     	article.setTitle(title);
     	article.setArticleType(articleType);
     }
+
+	/**
+	 * 初始化 log4j 的配置文件
+	 */
+	public void initLog4J(){
+		//初始化 log4j 文件的配置
+//		String classpath = System.getProperty("classPath");
+		String classpath = this.getClass().getClassLoader().getResource("/").toString();
+		System.setProperty("log.root",classpath);
+	}
     
     /**
      * 初始化数据库中的 用户 等信息
      * @throws ParseException
      */
     public void initDataBase() throws ParseException{
+
+		System.out.println("正在初始化数据库");
+		//初始化数据库池
+		DBManager.init(Constants.DB_ALIAS, Constants.DB_CONFIG_NAME);
+		logger.info("database pool init success!!!");
     	
     	//这里数据库首先尝试的是直接使用 new 来获取相对应的对象，看看会有什么情况发生
-    	UserService userService = new UserServiceImp();
+    	UserService userService = new UserService();
     	List<User> userList = userService.findAllUser();
     	
     	/**
@@ -159,8 +171,8 @@ public class SystemInitServlet extends HttpServlet {
     	/**
     	 * 从配置文件中获取 siteConfig 的配置内容
     	 */
-    	SiteConfigService siteConfigService = new SiteConfigServiceImp();
-    	SiteConfig siteConfig = new SiteConfig();
+    	SiteConfigService siteConfigService = new SiteConfigService();
+    	SiteConfig siteConfig;
     	
     	siteConfig = siteConfigService.findAllSiteConfig();
     	//如果数据库中没有任何的信息才出读取配置文件的相关信息并且保存到数据库中去

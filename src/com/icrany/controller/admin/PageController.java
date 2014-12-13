@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.icrany.pojo.Article;
+import com.icrany.vo.Article;
 import com.icrany.service.ArticleService;
-import com.icrany.service.imp.ArticleServiceImp;
 
 @Controller
 @RequestMapping("/jsp/admin/content")

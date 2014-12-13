@@ -1,4 +1,7 @@
-package com.icrany.pojo;
+package com.icrany.util;
+
+import com.icrany.view.ArticleView;
+import com.icrany.vo.Article;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,8 +9,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 一个分页类
- * @author Administrator
+ * 一个分页类工具
+ * @author iCrany
  *
  */
 public class Pager implements Serializable{
@@ -92,7 +95,7 @@ public class Pager implements Serializable{
 	}
 
 	//分页类自行进行分析，只需把结果传这个类,这个类根据相应的逻辑输出这个分页的html
-	public void doWithArticles(List<Article> articles,int currentPage,HttpServletRequest request){
+	public void doWithArticlesView(List<ArticleView> articles,Integer currentPage,HttpServletRequest request){
 		
 		this.itemTotal = articles.size();//设置查询的结果总数
 		
@@ -146,6 +149,63 @@ public class Pager implements Serializable{
 				+ url
 				+ this.nextPage + "'>&raquo;</a></li>");
 		
+		this.html = htmlPaging.toString();
+	}
+
+	public void doWithArticles(List<Article> articles,Integer currentPage,HttpServletRequest request){
+
+		this.itemTotal = articles.size();//设置查询的结果总数
+
+		setPageIndex(currentPage);//设置当前页
+		setPrePage(currentPage-1);//设置前一页
+		setPageTotal((this.itemTotal + this.pageSize ) / this.pageSize);//设置一共有多少页
+		setNextPage(currentPage+1);	//设置下一页，首先判断是否有下一页
+
+		//这里自己进行逻辑处理，输出那个分页的 html 代码
+		StringBuilder htmlPaging  = new StringBuilder("");
+
+		htmlPaging.append("<li><a href='"
+				+ url
+				+ this.prePage + "'>&laquo;</a></li>");
+
+		int begin = getPageIndex();
+		int end = begin +  getShowPageSize() ;//左闭右开区间
+
+		if(getPageIndex() >= 5){
+			begin = getPageIndex() - 4;
+		}else{
+			begin = 1;
+		}
+
+		end = begin + getShowPageSize();
+		if( end > getPageTotal()){
+			end = getPageTotal() + 1;
+		}
+
+		for(int i = begin ,j = 0 ; i < end ;i++,j++){
+
+			if(i == getPageIndex() ){
+				htmlPaging.append("<li class='active'><a href='"
+						+  url
+						+ ( i )//this.pageIndex + j
+						+ "'>"
+						+ ( i )
+						+ "</a></li>");
+			}else{
+
+				htmlPaging.append("<li><a href='"
+						+  url
+						+ ( i )
+						+ "'>"
+						+ ( i )
+						+ "</a></li>");
+			}
+		}
+
+		htmlPaging.append("<li><a href='"
+				+ url
+				+ this.nextPage + "'>&raquo;</a></li>");
+
 		this.html = htmlPaging.toString();
 	}
 
