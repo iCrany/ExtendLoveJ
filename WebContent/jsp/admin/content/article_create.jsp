@@ -13,10 +13,10 @@
 	    <script charset="utf-8" src="<%=request.getContextPath() %>/js/jquery-2.1.1.js" type="text/javascript"></script>		
 	    <script>
 			KindEditor.ready(function(K) {
-					editor = K.create('textarea[id="content"]', {
+					K.create('textarea[id="content"]', {
 						langType : 'zh_CN',
 						uploadJson : '<%=request.getContextPath()%>/kindEditorUpload',
-						allowFileManager : false,
+						allowFileManager : false
 					});
 				});
 				
@@ -47,23 +47,19 @@
 						<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
 					</ol>
 					<div class="content">
-					
 						<div class="panel panel-default">
 							<div class="panel-body">
-								
 								  <div class="form-group">
 								    <label for="title">文章标题</label>
 								    <input type="text" class="form-control" id="title" name="title">
 								  </div>
 								  <div class="form-group">
-								    <label for="txtContent">文章内容</label>
+								    <label for="content">文章内容</label>
 									<textarea id="content" name="content" class="form-control" rows="25">
 									
 									</textarea>
 								  </div>
-	
 								  <button type="submit" class="btn btn-primary">发表</button>
-								
 							</div>
 						</div>
 					</div>
@@ -90,7 +86,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">标签选择</h3>
 						</div>
-						<div class="tab-pane" id="recentposts">
+						<div class="tab-pane" id="recenttags">
 							<c:forEach items="${ tags }" var="tag" varStatus="itemStatus">
 								<div class="checkbox">
 								  <label>

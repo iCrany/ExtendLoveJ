@@ -24,7 +24,7 @@ public class TagService {
 		return tagDao.delete(entity);
 	}
 	
-	public Tag getById(int id){
+	public Tag getById(Integer id){
 		return tagDao.findById(id);
 	}
 	

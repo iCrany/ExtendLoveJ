@@ -12,33 +12,33 @@
           http://www.springframework.org/schema/aop 
           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
           
-		<context:component-scan base-package="com.icrany.dao.imp,com.icrany.service.imp" />
+		<context:component-scan base-package="com.icrany.dao,com.icrany.service" />
 
-<!-- 		数据源的配置           -->
-		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/ExtendLoveJ" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
-		<!-- 初始化连接 -->
-		<property name="initialSize" value="10" />
-		<property name="minIdle" value="10" />
-		<property name="maxIdle" value="20" />
-		<!-- 最大连接数量 -->
-		<property name="maxActive" value="40" />
-		<!-- 是否在自动回收超时连接的时候打印连接的超时错误 -->
-		<property name="logAbandoned" value="true" />
-		<!-- 是否自动回收超时连接 -->
-		<property name="removeAbandoned" value="true" />
-		<!-- 超时时间(以秒数为单位) -->
-		<property name="removeAbandonedTimeout" value="30" />
-		<!-- 得到连接前进行验证 ??-->
-		<property name="testOnBorrow" value="true" />
-		<!-- 验证语句  ？？-->
-		<property name="validationQuery" value="SELECT COUNT(*) FROM user" />
-		<!-- 超时等待时间以毫秒为单位 6000毫秒/1000等于60秒 -->
-		<property name="maxWait" value="6000" />
+<!--&lt;!&ndash; 		数据源的配置           &ndash;&gt;-->
+		<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"-->
+		<!--destroy-method="close">-->
+		<!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
+		<!--<property name="url" value="jdbc:mysql://localhost:3306/ExtendLoveJ" />-->
+		<!--<property name="username" value="root" />-->
+		<!--<property name="password" value="root" />-->
+		<!--&lt;!&ndash; 初始化连接 &ndash;&gt;-->
+		<!--<property name="initialSize" value="10" />-->
+		<!--<property name="minIdle" value="10" />-->
+		<!--<property name="maxIdle" value="20" />-->
+		<!--&lt;!&ndash; 最大连接数量 &ndash;&gt;-->
+		<!--<property name="maxActive" value="40" />-->
+		<!--&lt;!&ndash; 是否在自动回收超时连接的时候打印连接的超时错误 &ndash;&gt;-->
+		<!--<property name="logAbandoned" value="true" />-->
+		<!--&lt;!&ndash; 是否自动回收超时连接 &ndash;&gt;-->
+		<!--<property name="removeAbandoned" value="true" />-->
+		<!--&lt;!&ndash; 超时时间(以秒数为单位) &ndash;&gt;-->
+		<!--<property name="removeAbandonedTimeout" value="30" />-->
+		<!--&lt;!&ndash; 得到连接前进行验证 ??&ndash;&gt;-->
+		<!--<property name="testOnBorrow" value="true" />-->
+		<!--&lt;!&ndash; 验证语句  ？？&ndash;&gt;-->
+		<!--<property name="validationQuery" value="SELECT COUNT(*) FROM user" />-->
+		<!--&lt;!&ndash; 超时等待时间以毫秒为单位 6000毫秒/1000等于60秒 &ndash;&gt;-->
+		<!--<property name="maxWait" value="6000" />-->
 		
 		<!-- 
 		
@@ -62,12 +62,12 @@
 		超时为止，也可取值9000，表示9秒后超时。
 		
 		 -->
-	</bean>
+	<!--</bean>-->
 	
 <!-- 	数据库事物的配置 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	<!--<bean id="transactionManager"-->
+		<!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+		<!--<property name="dataSource" ref="dataSource" />-->
+	<!--</bean>-->
 
 </beans>

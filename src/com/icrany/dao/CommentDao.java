@@ -36,39 +36,6 @@ public class CommentDao extends BaseDAO<Comment>{
 	public Integer insert(Comment entity){
 		return this.save(entity);
 
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = "insert into comment(articleId,content,email,name,postIP,postTime,site,status,trash) values(?,?,?,?,?,?,?,?,?)";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, entity.getArticleId());
-//			pstmt.setString(2, entity.getContent());
-//			pstmt.setString(3, entity.getEmail());
-//			pstmt.setString(4, entity.getName());
-//			pstmt.setString(5, entity.getPostIP());
-//			pstmt.setTimestamp(6, new Timestamp(entity.getPostTime().getTime()));
-//			pstmt.setString(7, entity.getSite());
-//			pstmt.setBoolean(8, entity.getStatus());
-//			pstmt.setBoolean(9, entity.getTrash());
-//
-//			if(pstmt.execute()){
-//				return true;
-//			}
-//		} catch (SQLException e) {
-//			logger.info("添加评论出错了 " + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return false;
 	}
 	
 	/**
@@ -85,32 +52,6 @@ public class CommentDao extends BaseDAO<Comment>{
 		}
 
 		return -1;
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = "delete from comment where id = ?";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, entity.getId());
-//
-//			//TODO: 这些delete update 等更新的操作是不可以用 execute() 方法根据返回值来判断是否更新成功的
-//			if(pstmt.executeUpdate()>0){
-//				return true;
-//			}
-//		} catch (SQLException e) {
-//			logger.error("删除评论出错了" + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return false;
 	}
 	
 	/**
@@ -123,36 +64,7 @@ public class CommentDao extends BaseDAO<Comment>{
 		Comment entity = new Comment();
 		entity.setId(id);
 		return this.get(entity);
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		Comment comment = new Comment();
-//		String sql = "select * from comment where id = ?";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1,id);
-//
-//			rs = pstmt.executeQuery();
-//
-//			if(rs.next()){
-//				comment = fillComment(comment,rs);
-//				return comment;
-//			}
-//
-//		} catch (SQLException e) {
-//			logger.error("根据 id 来查找评论出错了" + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return null;
+
 	}
 	
 	/**
@@ -167,38 +79,7 @@ public class CommentDao extends BaseDAO<Comment>{
 			logger.error("查询所有的评论失败");
 		}
 		return null;
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		List<Comment> commentList = new ArrayList<Comment>();
-//
-//		String sql = "select * from comment";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//
-//			rs = pstmt.executeQuery();
-//
-//			while(rs.next()){
-//				Comment comment = new Comment();
-//				comment = fillComment(comment,rs);
-//				commentList.add(comment);
-//			}
-//			return commentList;
-//
-//		} catch (SQLException e) {
-//			logger.error("查找所有的评论出错了" + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return null;
+
 	}
 	
 	
@@ -217,38 +98,6 @@ public class CommentDao extends BaseDAO<Comment>{
 			logger.error("根据文章 id 来查询该文章的评论出错！！！",e);
 		}
 		return null;
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = "select * from comment where articleId = ?";
-//		List<Comment> commentList = new ArrayList<Comment>();
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, articleId);
-//
-//			rs = pstmt.executeQuery();
-//
-//			while(rs.next()){
-//				Comment entity = new Comment();
-//				entity = fillComment(entity,rs);
-//				commentList.add(entity);
-//			}
-//			return commentList;
-//
-//		} catch (SQLException e) {
-//			logger.error("获取文章对应的评论数组出错 "+e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return null;
 	}	
 	
 	/**
@@ -264,41 +113,7 @@ public class CommentDao extends BaseDAO<Comment>{
 			logger.error("查询最近的5条评论失败！！！",e);
 		}
 		return null;
-
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		List<Comment> commentList = new ArrayList<Comment>();
-//
-//		String sql = "select * from comment order by postTime desc";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//
-//			rs = pstmt.executeQuery();
-//
-//			while(rs.next()){
-//				Comment comment = new Comment();
-//				comment = fillComment(comment,rs);
-//				commentList.add(comment);
-//				if(commentList.size() >= 5) break;
-//			}
-//
-//			return commentList;
-//
-//		} catch (SQLException e) {
-//			logger.error("查找最新的评论出错了" + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//		return null;
-	}	
+	}
 	
 	/**
 	 * 更新评论
@@ -312,39 +127,6 @@ public class CommentDao extends BaseDAO<Comment>{
 			logger.error("更新评论失败！！！",e);
 		}
 		return -1;
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = "update comment set articleId=?,content=?,name=?,postIP=?,site=?, status=?,trash=? where id=?";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1,entity.getArticleId());
-//			pstmt.setString(2,entity.getContent());
-//			pstmt.setString(3, entity.getName());
-//			pstmt.setString(4,entity.getPostIP());
-//			pstmt.setString(5, entity.getSite());
-//			pstmt.setBoolean(6,entity.getStatus());
-//			pstmt.setBoolean(7,entity.getTrash());
-//			pstmt.setInt(8, entity.getId());
-//
-//			if(pstmt.execute()){
-//				return true;
-//			}
-//
-//		} catch (SQLException e) {
-//			logger.error("更新评论出错了" + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return false;
 	}
 	
 	/**
@@ -454,35 +236,4 @@ public class CommentDao extends BaseDAO<Comment>{
 
 		return false;
 	}
-	
-	/**
-	 * 根据 查询结果中的数据填充到 实例当中去
-	 * @param entity
-	 * @param rs
-	 * @return
-	 */
-	public Comment fillComment(Comment entity, ResultSet rs){
-		
-		try {
-			entity.setId(rs.getInt("id"));
-			entity.setArticleId(rs.getInt("articleId"));
-			entity.setContent(rs.getString("content"));
-			entity.setEmail(rs.getString("email"));
-			entity.setName(rs.getString("name"));
-			entity.setPostIP(rs.getString("postIP"));
-			entity.setSite(rs.getString("site"));
-			entity.setStatus(rs.getBoolean("status"));
-			entity.setTrash(rs.getBoolean("trash"));
-			entity.setPostTime(rs.getTimestamp("postTime"));
-			
-			return entity;
-		} catch (SQLException e) {
-			logger.error("填充评论实例出错了" + e.getStackTrace());
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	 
 }

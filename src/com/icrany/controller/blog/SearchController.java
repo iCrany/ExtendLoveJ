@@ -13,6 +13,7 @@ import com.icrany.service.*;
 import com.icrany.util.WapperUtil;
 import com.icrany.view.ArticleView;
 import com.icrany.vo.CategoryArticle;
+import com.icrany.vo.TagArticle;
 import org.directwebremoting.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -172,10 +173,10 @@ public class SearchController {
 	public List<ArticleView> searchByTagId(int id){
 		List<ArticleView> articleList = new ArrayList<ArticleView>();
 		
-		List<Integer> articleIdList = tagArticleService.queryByTagId(id);
+		List<TagArticle> articleIdList = tagArticleService.queryByTagId(id);
 		
 		for(int i = 0 ;i< articleIdList.size(); i++){
-			Article article = articleService.queryById(articleIdList.get(i));
+			Article article = articleService.queryById(articleIdList.get(i).getArticleId());
 			ArticleView articleView = WapperUtil.wapperArticle2View(article);
 			articleList.add(articleView);
 		}		

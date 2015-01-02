@@ -33,7 +33,6 @@ public class SiteConfigDao extends BaseDAO<SiteConfig> {
 	 * @return
 	 */
 	public Integer update( SiteConfig entity){
-
 		try {
 			return this._update(entity, false);
 		}catch(Exception e){
@@ -48,7 +47,6 @@ public class SiteConfigDao extends BaseDAO<SiteConfig> {
 	 * @return
 	 */
 	public SiteConfig find(SiteConfig entity){
-
 		try {
 			List<SiteConfig> siteConfigList = this.list(entity, null, null, null);
 
@@ -64,7 +62,6 @@ public class SiteConfigDao extends BaseDAO<SiteConfig> {
 	 * @return
 	 */
 	public SiteConfig findAllSiteConfig(){
-
 		try {
 			SiteConfig entity = new SiteConfig();
 			List<SiteConfig> siteConfigList = this.list(entity,0,1,null,null,null);

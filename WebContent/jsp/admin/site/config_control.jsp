@@ -35,7 +35,7 @@
 				<div class="content">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<form action="config_update" class="form-horizontal" role="form">
+							<form action="config_update" class="form-horizontal" role="form" method="post">
 							  <input type="hidden" name="id" id="id" value="${ siteConfig.id }">
 							  <div class="form-group">
 							    <label for="name" class="col-sm-2 control-label">名称</label>
@@ -44,9 +44,9 @@
 							    </div>
 							  </div>
 							  <div class="form-group">
-							    <label for="link" class="col-sm-2 control-label">链接</label>
+							    <label for="url" class="col-sm-2 control-label">链接</label>
 							    <div class="col-sm-10">
-							      <input type="text" class="form-control" id="link" name="link" value="${ siteConfig.url }" placeholder="链接 加上 http://">
+							      <input type="text" class="form-control" id="url" name="url" value="${ siteConfig.url }" placeholder="链接 加上 http://">
 							    </div>
 							  </div>							  
 							  <div class="form-group">

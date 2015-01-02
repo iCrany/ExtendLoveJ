@@ -32,7 +32,6 @@ public class LinkDao extends BaseDAO<Link>{
 	 * @return
 	 */
 	public Integer delete(Link entity){
-
 		try {
 			return this._delete(entity, false);
 		}catch(Exception e){
@@ -47,7 +46,6 @@ public class LinkDao extends BaseDAO<Link>{
 	 * @return
 	 */
 	public Link findById(Integer id){
-
 		Link entity = new Link();
 		entity.setId(id);
 		return this.get(entity);
@@ -58,7 +56,6 @@ public class LinkDao extends BaseDAO<Link>{
 	 * @return
 	 */
 	public List<Link> findAllLink(){
-
 		try {
 			Link entity = new Link();
 			return this.list(entity, null, null, null);
@@ -74,7 +71,6 @@ public class LinkDao extends BaseDAO<Link>{
 	 * @return
 	 */
 	public List<Link> findNewestLink(){
-
 		try {
 			Link entity = new Link();
 			return this.list(entity, null, "createTime desc", null);
@@ -90,7 +86,6 @@ public class LinkDao extends BaseDAO<Link>{
 	 * @return
 	 */
 	public Integer update(Link entity){
-
 		try {
 			return this._update(entity, false);
 		}catch(Exception e){

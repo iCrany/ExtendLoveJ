@@ -8,9 +8,11 @@
 		<link href="${pageContext.request.contextPath}/styles/common/mycss.css" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/styles/common/bootstrap.css" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/styles/common/bootstrap-theme.css" rel="stylesheet">
-		<!-- DC iMenu CSS -->
-		<link type="text/css" rel="stylesheet" href="../../styles/blog/menus/imenu/css/dc_imenu.css" />
-		
+
+		<!--js source -->
+		<script src="${pageContext.request.contextPath}/js/jquery-2.1.1.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath}/js/admin/index.js" type="text/javascript"></script>
+
 		<title>iCrany</title>
 	</head>
 
@@ -26,7 +28,7 @@
 			<!-- 隔壁的一些框框 侧边栏 -->
 			<div class="sidebar-offcanvas col-xs-2" id="sidebar"> <!-- sidebar-offcanvas -->
 				<ul class="nav nav-pills">
-				  <li class="active"><a href="${pageContext.request.contextPath}">首页</a></li>
+				  <li class=""><a href="${pageContext.request.contextPath}">博客首页</a></li>
 				</ul>
 			</div>
 			
@@ -42,18 +44,16 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<p>
-								该系统后台是由 jsp servlet 进行开发
+								该系统后台是由 jsp servlet 进行开发<br>
 								前端是由  各种js框架    bootstrap前端框架 
 								数据库 mysql 
-								不适用于 ie 内核的浏览器，建议使用 chrome firefox salrif等浏览器  
+								不适用于 ie 内核的浏览器，建议使用 chrome firefox safari等浏览器
 								欢迎大家交流学习
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-
 		</div>
 	</body>
 </html>

@@ -48,9 +48,7 @@ public class ArticleDao extends BaseDAO<Article>{
 		conn = DbUtil.getConnection();
 		
 		try {
-			
 			pstmt = conn.prepareStatement(sql);
-			
 			if(pstmt.execute()){
 				return 1;
 			}
@@ -145,7 +143,6 @@ public class ArticleDao extends BaseDAO<Article>{
 	 * @return
 	 */
 	public List<Article> findNavMenuItem(){
-
 		try{
 			Article entity = new Article();
 			entity.setArticleType("nav_menu_item");

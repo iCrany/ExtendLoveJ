@@ -73,10 +73,10 @@ public class ArticleService{
 		}
 
 		//3：获取相应的文章标签信息
-		List<Integer> tagIdList = tagArticleDao.queryByArticleId(articleId);
+		List<TagArticle> tagIdList = tagArticleDao.queryByArticleId(articleId);
 
 		for(int j = 0 ;j < tagIdList.size() ; j++){
-			int tagId = tagIdList.get(j);
+			int tagId = tagIdList.get(j).getTagId();
 
 			Tag tag = tagDao.findById(tagId);
 			articleView.getTagList().add(tag);
@@ -154,10 +154,10 @@ public class ArticleService{
 			}
 
 			//3：获取相应的文章标签信息
-			List<Integer> tagIdList = tagArticleDao.queryByArticleId(articleId);
+			List<TagArticle> tagIdList = tagArticleDao.queryByArticleId(articleId);
 
 			for(int j = 0 ;j < tagIdList.size() ; j++){
-				int tagId = tagIdList.get(j);
+				int tagId = tagIdList.get(j).getTagId();
 
 				Tag tag = tagDao.findById(tagId);
 				articleView.getTagList().add(tag);

@@ -1,11 +1,5 @@
 package com.icrany.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.icrany.system.Constants;
@@ -14,7 +8,6 @@ import org.kidding.orm.dao.imp.BaseDAO;
 import org.springframework.stereotype.Repository;
 
 import com.icrany.vo.CategoryArticle;
-import com.icrany.util.DbUtil;
 
 @Repository
 public class CategoryArticleDao extends BaseDAO<CategoryArticle>{
@@ -32,36 +25,6 @@ public class CategoryArticleDao extends BaseDAO<CategoryArticle>{
 	 */
 	public Integer insert(CategoryArticle entity){
 		return this.save(entity);
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql = "insert into category_article(categoryId,articleId) values(?,?)";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-//			pstmt.setInt(1,entity.getCategoryId());
-//			pstmt.setInt(2,entity.getArticleId());
-//
-//			pstmt.executeUpdate();
-//			rs = pstmt.getGeneratedKeys();
-//
-//			if(rs!=null && rs.next()){
-//				return rs.getInt(1);
-//			}
-//
-//		} catch (SQLException e) {
-//			logger.info("添加文章与对应分类信息出错了"+e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return -1;
 	}
 	
 	/**
@@ -79,38 +42,6 @@ public class CategoryArticleDao extends BaseDAO<CategoryArticle>{
 			logger.error("查询文章分类 id 信息出错！！！",e);
 		}
 		return null;
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		List<Integer> categoryIdList = new ArrayList<Integer>();
-//		String sql = "select categoryId from category_article where articleId = ?";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1,articleId);
-//
-//			rs = pstmt.executeQuery();
-//
-//			while(rs.next()){
-//				int categoryId = rs.getInt("categoryId");
-//				categoryIdList.add(categoryId);
-//			}
-//
-//			return categoryIdList;
-//
-//		} catch (SQLException e) {
-//			logger.info("查找文章对应的分类信息出错了" + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return null;
 	}
 	
 	/**
@@ -127,38 +58,6 @@ public class CategoryArticleDao extends BaseDAO<CategoryArticle>{
 			logger.error("查询文章 id 出错！！！",e);
 		}
 		return null;
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		List<Integer> articleIdList = new ArrayList<Integer>();
-//		String sql = "select articleId from category_article where categoryId = ?";
-//
-//		conn = DbUtil.getConnection();
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1,categoryId);
-//
-//			rs = pstmt.executeQuery();
-//
-//			while(rs.next()){
-//				int articleId = rs.getInt("articleId");
-//				articleIdList.add(articleId);
-//			}
-//
-//			return articleIdList;
-//
-//		} catch (SQLException e) {
-//			logger.info("查找文章对应的分类信息出错了" + e.getStackTrace());
-//			e.printStackTrace();
-//		}finally{
-//			DbUtil.close(rs);
-//			DbUtil.close(pstmt);
-//			DbUtil.close(conn);
-//		}
-//
-//		return null;
-	}	
+	}
 
 }

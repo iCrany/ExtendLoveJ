@@ -26,7 +26,7 @@ public class TagArticleService{
 	 * @param articleId
 	 * @return
 	 */
-	public boolean insertArray(int[] array,int articleId){
+	public Boolean insertArray(int[] array,int articleId){
 		for(int i=0;i<array.length;i++){
 			TagArticle entity = new TagArticle();
 			entity.setArticleId(articleId);
@@ -35,7 +35,6 @@ public class TagArticleService{
 				return false;
 			}
 		}
-		
 		return true;
 	}
 	
@@ -45,7 +44,7 @@ public class TagArticleService{
 	 * @param articleId
 	 * @return
 	 */
-	public boolean insertArray(String[] array,int articleId){
+	public Boolean insertArray(String[] array,Integer articleId){
 		int[] newArray = new int[array.length];
 		for(int i = 0; i< array.length ;i++){
 			newArray[i] = Integer.parseInt(array[i]);
@@ -53,11 +52,11 @@ public class TagArticleService{
 		return insertArray(newArray,articleId);
 	}
 
-	public List<Integer> queryByArticleId(int articleId) {
+	public List<TagArticle> queryByArticleId(Integer articleId) {
 		return tagArticleDao.queryByArticleId(articleId);
 	}
 
-	public List<Integer> queryByTagId(int tagId) {
+	public List<TagArticle> queryByTagId(Integer tagId) {
 		return tagArticleDao.queryByTagId(tagId);
 	}
 

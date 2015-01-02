@@ -51,10 +51,6 @@
     <servlet-class>com.icrany.system.SystemInitServlet</servlet-class>
     <load-on-startup>10</load-on-startup>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>SystemInitServlet</servlet-name>
-    <url-pattern>/SystemInitServlet</url-pattern>
-  </servlet-mapping>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>

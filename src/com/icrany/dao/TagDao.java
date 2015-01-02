@@ -24,7 +24,6 @@ public class TagDao  extends BaseDAO<Tag>{
 	 * @return
 	 */
 	public Integer insert(Tag entity){
-
 		return this.save(entity);
 	}
 	
@@ -34,7 +33,6 @@ public class TagDao  extends BaseDAO<Tag>{
 	 * @return
 	 */
 	public Integer delete(Tag entity){
-
 		try {
 			return this._delete(entity, false);
 		}catch(Exception e){
@@ -49,10 +47,8 @@ public class TagDao  extends BaseDAO<Tag>{
 	 * @return
 	 */
 	public Tag findById(Integer id){
-
 		Tag entity = new Tag();
 		entity.setId(id);
-
 		return this.get(entity);
 	}
 	
@@ -61,7 +57,6 @@ public class TagDao  extends BaseDAO<Tag>{
 	 * @return
 	 */
 	public List<Tag> findAllTag(){
-
 		try {
 			Tag entity = new Tag();
 			return this.list(entity, null, null, null);
@@ -77,7 +72,6 @@ public class TagDao  extends BaseDAO<Tag>{
 	 * @return
 	 */
 	public Integer update(Tag entity){
-
 		try {
 			return this._update(entity, false);
 		}catch(Exception e){

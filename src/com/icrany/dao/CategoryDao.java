@@ -61,7 +61,6 @@ public class CategoryDao extends BaseDAO<Category>{
 	 * @return 返回符合条件的对象列表
 	 */
 	public List<Category> findAllCategory(){
-
 		try {
 			Category entity = new Category();
 			return this.list(entity, null, null, null);

@@ -89,9 +89,6 @@ public class CategoryController {
 	 */
 	@RequestMapping(value="/category_create",method=RequestMethod.POST)
 	public String createMethodPost(Map<String,Object> map,Category category){
-		System.out.println(" category name = "+category.getName());
-		System.out.println(" category description = "+ category.getDescription());
-		
 		createDataPrepare(category);
 		if(categoryService.save(category) >= 0){
 			System.out.println(" category 添加成功了");
@@ -129,8 +126,6 @@ public class CategoryController {
 	public String updateMethodGet(@RequestParam(value="id",required=true) Integer id,Map<String,Object> map, Category category){
 		
 		category = categoryService.findById(id);
-		
-		
 		map.put("category", category);
 		
 		return UPDATE_CATEGORY;
